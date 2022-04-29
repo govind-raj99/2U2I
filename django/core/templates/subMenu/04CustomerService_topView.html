@@ -1,0 +1,151 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="h5 fw-normal mb-2">Top View</div>
+    <div class="row justify-content-md-center">
+        <div class="col-12 col-xl-6 mb-2">
+            <div class="col-12 px-0 mb-2">
+                <div class="card border-light shadow-sm">
+                    <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+                        <div class="d-block">
+                            <div class="h6 fw-normal text-gray mb-2">Most Frequent</div>
+                            <!--h2 class="h3">452</h2>
+                            <div class="small mt-2">                               
+                                <span class="fas fa-angle-up text-success"></span>                                   
+                                <span class="text-success fw-bold">18.2%</span>
+                            </div-->
+                        </div>
+                        <div class="d-block ms-auto">
+                            <!--div class="d-flex align-items-center text-right mb-2">
+                                <span class="shape-xs rounded-circle bg-dark me-2"></span>
+                                <span class="fw-normal small">May</span>
+                            </div>
+                            <div class="d-flex align-items-center text-right">
+                                <span class="shape-xs rounded-circle bg-secondary me-2"></span>
+                                <span class="fw-normal small">June</span>
+                            </div-->
+                        </div>
+                    </div>
+                    <div class="card-body p-2">test
+                        <!-- tableau sample data (Method 2 - Embed Code) -->
+                        <!--script type='text/javascript' src='https://prod-apnortheast-a.online.tableau.com/javascripts/api/viz_v1.js'></script>
+                        <div class='tableauPlaceholder' style='width: 775px; height: 700px;'>
+                            <object class='tableauViz' width='775' height='700' style='display:none;'>
+                                <param name='host_url' value='https%3A%2F%2Fprod-apnortheast-a.online.tableau.com%2F' /> 
+                                <param name='embed_code_version' value='3' /> 
+                                <param name='site_root' value='&#47;t&#47;testingtf' />
+                                <param name='name' value='Regional1&#47;College' />
+                                <param name='tabs' value='no' />
+                                <param name='toolbar' value='yes' />
+                                <param name='showAppBanner' value='false' />
+                        </object>
+                    </div-->
+                        <!--div class="ct-chart-ranking ct-golden-section ct-series-a"></div-->
+                        <script type='text/javascript' src='https://prod-apnortheast-a.online.tableau.com/javascripts/api/viz_v1.js'></script>
+                        <div class='tableauPlaceholder' style='width: 1000px; height: 827px;'><object class='tableauViz' width='1000' height='827' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fprod-apnortheast-a.online.tableau.com%2F' /> 
+                        <param name='embed_code_version' value='3' /> 
+                        <param name='site_root' value='&#47;t&#47;lazul' />
+                        <param name='name' value='CallSample&#47;CallerInfoDashboard' />
+                        <param name='tabs' value='no' /><param name='toolbar' value='yes' />
+                        <param name='display_count' value='n' /><param name='origin' value='viz_share_link' />
+                        <param name='showAppBanner' value='false' />
+                        </object>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-xl-6 mb-2">
+            <div class="col-12 px-0 mb-2">
+                <div class="card border-light shadow-sm">
+                    <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+                        <div class="d-block">
+                            <div class="h6 fw-normal text-gray mb-2">Longest Call</div>
+                            <!--h2 class="h3">452</h2>
+                            <div class="small mt-2">                               
+                                <span class="fas fa-angle-up text-success"></span>                                   
+                                <span class="text-success fw-bold">18.2%</span>
+                            </div-->
+                        </div>
+                        <div class="d-block ms-auto">
+                            <!--div class="d-flex align-items-center text-right mb-2">
+                                <span class="shape-xs rounded-circle bg-dark me-2"></span>
+                                <span class="fw-normal small">May</span>
+                            </div>
+                            <div class="d-flex align-items-center text-right">
+                                <span class="shape-xs rounded-circle bg-secondary me-2"></span>
+                                <span class="fw-normal small">June</span>
+                            </div-->
+                        </div>
+                    </div>
+                    <div class="card-body p-2">
+                         <!-- tableau embed (Method 1 - iframe)  -->
+                        <iframe width="775px" height="700px" src="https://prod-apnortheast-a.online.tableau.com/t/testingtf/views/Regional3/Scatter?:inktarget=_blank&:iframeSizedToWindow=true&:embed=y&:toolbar=no&:showAppBanner=false&:display_count=no&:showVizHome=no&:origin=viz_share_link">
+                        </iframe>
+                        <!--div class="ct-chart-ranking ct-golden-section ct-series-a"></div-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-md-right">
+        <div class="col-12 col-xl-6 mb-2">
+            <div class="col-12 px-0 mb-2">
+                <div class="card border-light shadow-sm">
+                    <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+                        <div class="d-block">
+                            <div class="h6 fw-normal text-gray mb-2">Most Expensive</div>
+                            <!--h2 class="h3">452</h2>
+                            <div class="small mt-2">                               
+                                <span class="fas fa-angle-up text-success"></span>                                   
+                                <span class="text-success fw-bold">18.2%</span>
+                            </div-->
+                        </div>
+                        <div class="d-block ms-auto">
+                            <!--div class="d-flex align-items-center text-right mb-2">
+                                <span class="shape-xs rounded-circle bg-dark me-2"></span>
+                                <span class="fw-normal small">May</span>
+                            </div>
+                            <div class="d-flex align-items-center text-right">
+                                <span class="shape-xs rounded-circle bg-secondary me-2"></span>
+                                <span class="fw-normal small">June</span>
+                            </div-->
+                        </div>
+                    </div>
+                    <div class="card-body p-2">
+                        <div ><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+                        <!--div class="ct-chart-ranking ct-golden-section ct-series-a"></div-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--div class="col-12 col-xl-6 mb-2">
+            <div class="col-12 px-0 mb-2">
+                <div class="card border-light shadow-sm">
+                    <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+                        <div class="d-block">
+                            <div class="h6 fw-normal text-gray mb-2">Time of Day Details</div>
+                        </div>
+                        <div class="d-block ms-auto">
+                        </div>
+                    </div>
+                    <div class="card-body p-2">
+                        <div ><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+                     </div>
+                </div>
+            </div>
+        </div-->
+    </div>
+    
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

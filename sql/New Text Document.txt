@@ -1,0 +1,62 @@
+update "data".unbilled set hr_id =
+case when hr = '12AM - 2AM' then 1
+when hr = '3AM - 5AM' then 2
+when hr = '6AM - 8AM' then 3
+when hr = '9AM - 11AM' then 4
+when hr = '3PM - 5PM' then 5
+when hr = '12PM - 2PM' then 6
+when hr = '6PM - 8PM' then 7
+when hr = '9PM - 11PM' then 8
+else null end
+
+
+select *,
+case when u.duration >= 1 and u.duration <=15 then '1-15 seconds'
+when u.duration >= 16 and u.duration <=30 then '16-30 seconds'
+when u.duration >= 31 and u.duration <=45 then '31-45 seconds'
+when u.duration >= 46 and u.duration <=59 then '46-59 seconds'
+when u.duration >= 60 and u.duration <=120 then '1-2 minutes'
+when u.duration >120 then 'Greater than 2 minutes'
+else null end as dur_range
+from "data".billed u
+
+update data.unbilled set dur_range_id =
+case when dur_range = '1-15 seconds' then 1
+when dur_range = '16-30 seconds' then 2
+when dur_range = '31-45 seconds' then 3
+when dur_range = '46-59 seconds' then 4
+when dur_range = '1-2 minutes' then 5
+when dur_range = 'Greater than 2 minutes' then 6
+else 7 end
+
+update data.unbilled set state_id =
+CASE
+WHEN state = 'PERLIS' THEN 1
+WHEN state = 'KEDAH' THEN 2
+WHEN state = 'P.PINANG' THEN 3
+WHEN state = 'PERAK' THEN 4
+WHEN state = 'KELANTAN' THEN 5
+WHEN state = 'TERENGGANU' THEN 6
+WHEN state = 'PAHANG' THEN 7
+WHEN state = 'SELANGOR' THEN 8
+WHEN state = 'W.P KUALA LUMPUR' THEN 9
+WHEN state = 'W.P PUTRAJAYA' THEN 10
+WHEN state = 'W.P LABUAN' THEN 11
+WHEN state = 'N. SEMBILAN' THEN 12 --'NEGERI SEMBILAN'
+WHEN state = 'MELAKA' THEN 13
+WHEN state = 'JOHOR' THEN 14
+WHEN state = 'SABAH' THEN 15
+WHEN state = 'SARAWAK' THEN 16
+WHEN state = 'PERLIS / KEDAH / PULAU PINANG' THEN 17
+WHEN state = 'KEDAH / PERLIS' THEN 18
+WHEN state = 'KELANTAN / TERENGGANU / PAHANG' THEN 19
+WHEN state = 'N. SEMBILAN / MELAKA' THEN 20
+WHEN state = 'MOBILE' THEN 21
+WHEN state = 'OTHERS' THEN 22
+else 23 end
+
+case when ub.stop_reason = 'Called Busy' then 1 else 0 end as busy,
+case when ub.stop_reason = 'No Answer' then 1 else 0 end as no_answer,
+case when ub.stop_reason not in ('Called Busy','No Answer','Answered Call') then 1 else 0 end as other,
+
+test 1

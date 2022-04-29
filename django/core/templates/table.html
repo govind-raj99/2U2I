@@ -1,0 +1,17 @@
+{% extends "layouts/basee.html" %}
+
+{% block title %} Download {% endblock %}
+{% block content %}
+
+
+df=pd.read_excel("C:\Users\Admin\Desktop\tollfree\django\\Toll Free Fake Data1yr04.xlsx") # Path of the file. 
+df.to_html('D:\\my_data\\my_html.html')
+
+
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

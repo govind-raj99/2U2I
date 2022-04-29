@@ -1,0 +1,36 @@
+{% extends "layouts/basee.html" %}
+
+{% block title %} Delete Company {% endblock %} 
+
+{% block content %}
+
+<!-- <h3>Delete Username : {{ user.username }}</h3> -->
+<div class="col-12 col-xl-12 mb-2">
+    <div class="col-12 px-0 mb-2">
+        <div class="card border-light shadow-sm">
+            <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+                <div class="d-block mb-3 mb-sm-0">
+                    <div class="h2 fw-normal text-black mb-2">Company</div>
+                    <br/>
+                    <h2 class="h5 mb-4">Company information</h2>
+                    <div class = "form-group">
+                            <form method="POST">
+                            {% csrf_token %}
+                            <!-- {{form.as_p}} -->
+                            <strong>Are you sure you want to delete the following Company :-<br>
+                                <br><li>Name: {{ company.name }}</li>
+                                <br><li>Code : {{ company.code }}</li>
+                            </strong><br><br><br>
+                            <button class="btn btn-primary btn-lg" style="background-color:#ee0202; border: #ee0202;">Delete</button>
+                            <a href="{% url 'list_company' %}" class="btn btn-dark btn-lg" style="background-color:#ee7202; border: #ee7202;" role="button" > Back To List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

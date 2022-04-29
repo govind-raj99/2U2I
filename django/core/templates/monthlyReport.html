@@ -1,0 +1,839 @@
+{% extends "layouts/basee.html" %}
+
+{% block title %} Download {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<!-- Specific tag HERE  -->
+{% load mycustom_tags %}
+
+{% now "Ym-" as todaysDate %}
+{% now "b" as todaysMonth %}
+{% now "n" as todaysMonthAsNum %}
+{% monthToNum todaysMonth  as todaysMonthAsNum %}
+
+<!--<br>
+{{ todaysMonthAsNum|add:"-2"}}<br>
+
+-monthnumber : {{ todaysMonthAsNum|month_name }}<br>
+--{% minustwo todaysMonthAsNum %}--
+--{% minusone todaysMonthAsNum %}--
+{% now "Y" as current_year %}
+ <br><br>
+It is3 {% now "M" %}
+<br><br>
+Copyright {{ current_year }}-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<!-- stylesheet for the w3 class -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style>
+
+    #div-desc {margin-left:70px; margin-right:70px; margin-top:70px;}
+    .desc {font-size: 100%;}
+
+    table.GeneratedTable {
+      width: 87%;
+      background-color: #ffffff;
+      border-collapse: collapse;
+      border-width: 0px;
+      color: #000000;
+    }
+
+    table.GeneratedTable td, table.GeneratedTable th {
+      border-width: 0px;
+      padding: 5px;
+      text-align: center;
+    }
+
+    table.GeneratedTable thead {
+      background-color: #1e81c8;
+    }
+
+    table.GeneratedTable th {
+        color:white;
+    }
+
+    table.GeneratedTable tr td {
+        padding: 10px 30px 10px 30px;
+        border-bottom: 1px solid gray;
+    }
+        .td-border {
+                border:2px solid grey;
+                vertical-align: top;
+        }
+
+    .td-style {vertical-align:top; border:0px; padding:10px;}
+
+    .h1-style {
+        border-bottom: 3px solid rgba(170, 172, 173, 0.8);
+        margin-bottom:80px;
+    }
+
+	#download {
+			font-size:1.5em;
+			color: rgba(66, 135, 245, 0.7);
+	}
+	#download:hover {
+			color: #0072ce;
+	}
+
+	@media screen and (max-width: 600px) {
+			.desc {
+					font-size: 80%;}
+			#div-desc {
+					margin-left:20px;
+					margin-right:20px;
+					margin-top:70px; }
+			.pg-title {
+					font-size: 120; %;}
+
+	}
+	
+	/* FOR DROPDOWN FILTER */
+	.dropbtn {
+	  background-color: #dbdbdb;
+	  color: black;
+	  padding: 10px;
+	  padding-right:300px;
+	  margin-right:15px;
+	  font-size: 16px;
+	  border: none;
+	  cursor: pointer;
+	}
+
+	.dropbtn:hover, .dropbtn:focus {
+	  background-color: rgba(0, 114, 206,0.7);
+	  color: white;
+	}
+
+	#myInput {
+	  box-sizing: border-box;
+	  background-image: url('searchicon.png');
+	  background-position: 14px 12px;
+	  background-repeat: no-repeat;
+	  font-size: 16px;
+	  padding: 14px 20px 12px 45px;
+	  border: none;
+	  border-bottom: 1px solid #ddd;
+	}
+
+	#myInput:focus {outline: 3px solid #ddd;}
+
+	.dropdown {
+	  position: relative;
+	  display: inline-block;
+	}
+
+	.dropdown-content {
+	  display: none;
+	  position: absolute;
+	  background-color: #f6f6f6;
+	  min-width: 230px;
+	  overflow: auto;
+	  border: 1px solid #ddd;
+	  z-index: 1;
+	}
+
+	.dropdown-content a {
+	  color: black;
+	  padding: 12px 16px;
+	  text-decoration: none;
+	  display: block;
+	}
+
+	.dropdown a:hover {background-color: #ddd;}
+
+	.show {display: block;}
+ </style>
+
+
+
+<body>
+    <div class="col-lg-12 d-sm-flex flex-row align-items-center flex-0">
+        <div class="d-block mb-3 mb-sm-0" id="div-desc">
+            <div class="h5 fw-normal mb-2 h1-style w3-animate-bottom">
+                <h1 class="w3-animate-bottom pg-title">Monthly Report</h1>
+            </div>
+            <!--{% comment %} <div class="row justify-content-md-center">
+                <div class="col-12 mb-3">
+                    <div class="card bg-primary-alt">
+                        <div class="card-header d-sm-flex flex-row">
+                            <div class="d-block mb-3 mb-sm-0"> {% endcomment %}-->
+                            {% if request.user.is_superuser %}
+                                <article id="faq134" style="margin-top:30px;" class="desc">
+                                    Below is the list of companies subscribed to TollFree InSight Reports. You may click to view,
+                                    or download the monthly ViSight PDF reports. If you have not installed an
+                                    Adobe PDF reader on your computer, please click this
+                                    <a href="http://get.adobe.com/reader/" style="color:#f58200; font-weight:600;" target="_blank">link</a>
+                                    to follow the installation. <!--<a href="http://get.adobe.com/reader/" style="color: rgb(238, 114, 2)" target="_blank">http://get.adobe.com/reader/</a>-->
+                                </article>
+                            {% else %}
+                            <article id="faq134" style="margin-top:30px;" class="desc">
+                                    Below are your latest 5 months InSight report. You may click to view,
+                                    or download the monthly ViSight PDF reports. If you have not installed an
+                                    Adobe PDF reader on your computer, please click this
+                                    <a href="http://get.adobe.com/reader/" style="color:#f58200; font-weight:600;" target="_blank">link</a>
+                                    to follow the installation. <!--<a href="http://get.adobe.com/reader/" style="color: rgb(238, 114, 2)" target="_blank">http://get.adobe.com/reader/</a>-->
+                                </article>
+                            {% endif %}
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+        </div>
+    </div><br><br>
+
+
+    <div class="col-lg-12" style="margin-left:70px; margin-right:100px; padding-bottom:15em;">
+            <!--<div style="width:90%;">
+                <form class="navbar-search-input justify-content-center" onsubmit="return executeSearch();">
+                        <input type="text" class="form-control"  name="acc" id="id_acc" placeholder="Search Account Number">
+                </form>
+            </div>-->
+			
+			<div class="dropdown">
+			  <button onclick="myFunction()" class="dropbtn">Account Number:</button>
+			  <div id="myDropdown" class="dropdown-content">
+				<a href="#about">A600250347506</a>
+				<a href="#base">A600250351402</a>
+				<a href="#blog">K910615152010</a>
+			  </div>
+			</div>
+
+			<div class="dropdown">
+			  <button onclick="myFunction2()" class="dropbtn">TollFree Number:</button>
+			  <div id="myDropdown2" class="dropdown-content">
+				<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+				<a href="#about">1800-224-848</a>
+				<a href="#base">1800-887-588</a>
+				<a href="#blog">1300-487-338</a>
+				<a href="#contact">1300-007-388</a>
+				<a href="#custom">1800-899-588</a>
+			  </div>
+			</div>
+			
+			<script>
+				/* When the user clicks on the button,
+				toggle between hiding and showing the dropdown content */
+				function myFunction() {
+				  document.getElementById("myDropdown").classList.toggle("show");
+				}
+
+				function myFunction2() {
+				  document.getElementById("myDropdown2").classList.toggle("show");
+				}
+
+				function filterFunction() {
+				  var input, filter, ul, li, a, i;
+				  input = document.getElementById("myInput");
+				  filter = input.value.toUpperCase();
+				  div = document.getElementById("myDropdown2");
+				  a = div.getElementsByTagName("a");
+				  for (i = 0; i < a.length; i++) {
+					txtValue = a[i].textContent || a[i].innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+					  a[i].style.display = "";
+					} else {
+					  a[i].style.display = "none";
+					}
+				  }
+				}
+			</script>
+
+			
+			<br><br><br>
+
+            {% if request.user.is_superuser %}
+
+                <table class="GeneratedTable">
+                    <thead>
+                        <tr>
+                            <th> List of Companies </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for comp in comps %}
+                        <tr>
+                            <!--<td><a href="{% url 'detail_company' comp.pk %}">{{comp.name}}</a></td>-->
+                            <td><a href="{% url 'MonthlyReportDetail' comp.pk %}" target="_self"> {{comp.name}} </a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            {% else %}
+            {% csrf_token %}
+
+                  <!--User's View -->
+                  <table class="GeneratedTable">
+                    <thead>
+                        <tr>
+                            <th>Months</th>
+                            <th>Account Number</th>
+                            <th> Tollfree Report</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="td-border">
+
+                                    <table align="center">
+                                        <!-- Last 5 months -->
+                                        <tr>
+                                            {% with l5m=todaysMonthAsNum|add:"-5" %}
+                                                {% if l5m == 1 %}
+                                                    {% with l5m="January" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l5m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l5m == 2 %}
+                                                    {% with l5m="February" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l5m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l5m == 3 %}
+                                                    {% with l5m="March" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l5m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l5m == 4 %}
+                                                    {% with l5m="April" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l5m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l5m == 5 %}
+                                                    {% with l5m="May" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l5m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l5m == 6 %}
+                                                    {% with l5m="June" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l5m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l5m == 7 %}
+                                                    {% with l5m="July" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l5m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l5m == 8 or l5m == -4  %}
+                                                    {% with l5m="August" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l5m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l5m == 9 or l5m == -3 %}
+                                                    {% with l5m="September" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l5m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l5m == 10 or l5m == -2 %}
+                                                    {% with l5m="October" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l5m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l5m == 11 or l5m == -1 %}
+                                                    {% with l5m="November" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l5m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l5m == 0 %}
+                                                    {% with l5m="December" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l5m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% else %}
+                                                    {% with l5m="December" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l5m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% endif %}
+                                            {% endwith %}
+                                        </tr>
+
+                                        <!-- Last 4 months-->
+                                        <tr>
+                                            {% with l4m=todaysMonthAsNum|add:"-4" %}
+                                                {% if l4m == 1 %}
+                                                    {% with l4m="January" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l4m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l4m == 2 %}
+                                                    {% with l4m="February" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l4m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l4m == 3 %}
+                                                    {% with l4m="March" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l4m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l4m == 4 %}
+                                                    {% with l4m="April" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l4m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l4m == 5 %}
+                                                    {% with l4m="May" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l4m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l4m == 6 %}
+                                                    {% with l4m="June" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l4m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l4m == 7 %}
+                                                    {% with l4m="July" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l4m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l4m == 8 %}
+                                                    {% with l4m="August" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l4m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l4m == 9 or l4m == -2 %}
+                                                    {% with l4m="September" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l4m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l4m == 10 or l4m == -2 %}
+                                                    {% with l4m="October" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l4m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l4m == 11 or l4m == -1 %}
+                                                    {% with l4m="November" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l4m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l4m == 0 %}
+                                                    {% with l4m="December" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l4m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% else %}
+                                                    {% with l4m="December" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l4m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% endif %}
+                                            {% endwith %}
+                                        </tr>
+
+                                        <!-- Last 3 months -->
+                                        <tr>
+                                            {% with l3m=todaysMonthAsNum|add:"-3" %}
+                                                {% if l3m == 1 %}
+                                                    {% with l3m="January" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l3m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l3m == 2 %}
+                                                    {% with l3m="February" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l3m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l3m == 3 %}
+                                                    {% with l3m="March" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l3m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l3m == 4 %}
+                                                    {% with l3m="April" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l3m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l3m == 5 %}
+                                                    {% with l3m="May" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l3m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l3m == 6 %}
+                                                    {% with l3m="June" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l3m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l3m == 7 %}
+                                                    {% with l3m="July" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l3m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l3m == 8 %}
+                                                    {% with l3m="August" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l3m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l3m == 9 %}
+                                                    {% with l3m="September" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l3m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l3m == 10 or l3m == -2 %}
+                                                    {% with l3m="October" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l3m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l3m == 11 or l3m == -1 %}
+                                                    {% with l3m="November" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l3m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l3m == 0 %}
+                                                    {% with l3m="December" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l3m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% else %}
+                                                    {% with l3m="December" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l3m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% endif %}
+                                            {% endwith %}
+                                        </tr>
+
+                                        <!-- Last 2 months -->
+                                        <tr>
+                                            {% with l2m=todaysMonthAsNum|add:"-2" %}
+                                                {% if l2m == 1 %}
+                                                    {% with l2m="January" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l2m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l2m == 2 %}
+                                                    {% with l2m="February" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l2m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l2m == 3 %}
+                                                    {% with l2m="March" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l2m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l2m == 4 %}
+                                                    {% with l2m="April" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l2m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l2m == 5 %}
+                                                    {% with l2m="May" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l2m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l2m == 6 %}
+                                                    {% with l2m="June" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l2m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l2m == 7 %}
+                                                    {% with l2m="July" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l2m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l2m == 8 %}
+                                                    {% with l2m="August" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l2m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l2m == 9 %}
+                                                    {% with l2m="September" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l2m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l2m == 10 or l2m == -2 %}
+                                                    {% with l2m="October" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l2m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l2m == 11 or l2m == -1 %}
+                                                    {% with l2m="November" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l2m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif l2m == 0 %}
+                                                    {% with l2m="December" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l2m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% else %}
+                                                    {% with l2m="December" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ l2m }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% endif %}
+                                            {% endwith %}
+                                        </tr>
+
+                                        <!-- Last month -->
+                                        <tr>
+                                            {% with lm=todaysMonthAsNum|add:"-1" %}
+                                                {% if lm == 1 %}
+                                                    {% with lm="January" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ lm }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif lm == 2 %}
+                                                    {% with lm="February" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ lm }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif lm == 3 %}
+                                                    {% with lm="March" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ lm }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif lm == 4 %}
+                                                    {% with lm="April" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ lm }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif lm == 5 %}
+                                                    {% with lm="May" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ lm }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif lm == 6 %}
+                                                    {% with lm="June" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ lm }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif lm == 7 %}
+                                                    {% with lm="July" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ lm }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif lm == 8 %}
+                                                    {% with lm="August" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ lm }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif lm == 9 %}
+                                                    {% with lm="September" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ lm }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif lm == 10 %}
+                                                    {% with lm="October" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ lm }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif lm == 11  %}
+                                                    {% with lm="November" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ lm }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% elif lm == 0 %}
+                                                    {% with lm="December" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ lm }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% else %}
+                                                    {% with lm="December" %}
+                                                    <td style="vertical-align: top; border:0px; padding:10px;">
+                                                        {{ lm }}
+                                                    </td>
+                                                    {% endwith %}
+                                                {% endif %}
+                                            {% endwith %}
+                                        </tr>
+                                    </table>
+                            </td>
+							
+							<td class="td-border">
+								<table align="center">
+                                    <!--{% for accnum in accnumdetails %}
+										{% for plist in pdfFileList %}
+											{# if accnum == plist|slice:"7:20"|get_len #}
+											{% if plist|slice:"7:20"|get_len == 'A600250347506' %}
+												 TEST 1
+												<tr>
+													<td style="vertical-align: top; border:0px; padding:10px;">
+														{{accnum}} - {{ plist|slice:"21:"|get_len }}
+														TEST
+													</td>
+												</tr>
+											{% endif %}
+										{% endfor %}
+                                    {% endfor %}-->
+									
+									<tr>
+										{% for accnum in accnumdetails %}
+											<tr>
+												<td style="vertical-align: top; border:0px; padding:10px;">
+													{{accnum}} 
+												</td>
+											</tr>
+										{% endfor %}
+									</tr>
+									<tr>
+										{% for accnum in accnumdetails %}
+											<td style="vertical-align: top; border:0px; padding:10px;">
+												{{accnum}} 
+											</td>
+										{% endfor %}
+									</tr>
+									<tr>
+										{% for accnum in accnumdetails %}
+											<td style="vertical-align: top; border:0px; padding:10px;">
+												{{accnum}} 
+											</td>
+										{% endfor %}
+									</tr>
+									<tr>
+										{% for accnum in accnumdetails %}
+											<td style="vertical-align: top; border:0px; padding:10px;">
+												{{accnum}} 
+											</td>
+										{% endfor %}
+									</tr>
+									<tr>
+										{% for accnum in accnumdetails %}
+											<td style="vertical-align: top; border:0px; padding:10px;">
+												{{accnum}} 
+											</td>
+										{% endfor %}
+									</tr>
+							
+                                </table>
+							</td>
+
+                            <!--<td class="td-border">
+                                <table align="center">
+                                    {% for plist in pdfFileList %}
+                                    {% if uname == plist|slice:"7:20"|get_len %}
+                                    <tr>
+                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                            {{uname}} - {{ plist|slice:"21:"|get_len }}
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                </table>
+                            </td>-->
+
+                            <td class="td-border">
+                                <table align="center">
+                                    <tr>
+                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                            <a href="../../../static/PDFFile/202109-B502955001506-MALAYAN BANKING BERHAD.pdf" download>
+                                                <i class="fa fa-download download-button" aria-hidden="true" id="download"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                            <a href="../../../static/PDFFile/202109-B502955001506-MALAYAN BANKING BERHAD.pdf" download>
+                                                <i class="fa fa-download download-button" aria-hidden="true" id="download"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                            <a href="../../../static/PDFFile/202109-B502955001506-MALAYAN BANKING BERHAD.pdf" download>
+                                                <i class="fa fa-download download-button" aria-hidden="true" id="download"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                            <a href="../../../static/PDFFile/202109-B502955001506-MALAYAN BANKING BERHAD.pdf" download>
+                                                <i class="fa fa-download download-button" aria-hidden="true" id="download"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                            <a href="../../../static/PDFFile/202109-B502955001506-MALAYAN BANKING BERHAD.pdf" download>
+                                                <i class="fa fa-download download-button" aria-hidden="true" id="download"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+   {% endif %}
+   </div>
+</body>
+
+
+<footer style="background-color:#33384b; height:30px; position:fixed; width:100%; bottom:0;">
+    <p class="footerText" style="margin-top:6px; font-size:10px; text-align:right; padding-right:20px; color:white;">© 2021 Copyright Telekom Malaysia</p>
+</footer>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,48 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="h5 fw-normal mb-2">Missed Call</div>
+    <!--<div class="row justify-content-md-center">
+        <div class="col-12  mb-3">-->
+        <div class="row justify-content-md-right">
+        <div class="col-12 col-xl-12 mb-2">    
+            <div class="card bg-secondary-alt shadow-sm">
+                <div class="card-header d-sm-flex flex-row align-items-center flex-0">
+                    <div class="d-block mb-3 mb-sm-0">
+                        <div class="h5 fw-normal mb-2">Missed Call</div>
+                    </div>
+                </div>
+            <!-- tableau sample data (Method 3 - API) -->
+            <body onload="initViz();">
+                <div class="card-body p-2" id="vizContainer">
+                    <script type="text/javascript" src='https://online.tableau.com/javascripts/api/tableau-2.8.0.min.js'></script>
+                    <script type="text/javascript">
+                        function initViz() {
+                            var containerDiv = document.getElementById("vizContainer"),
+                                url = "https://prod-apnortheast-a.online.tableau.com/t/lazul/views/CallSample/CallerInfoDashboard?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link"
+                                options = {
+                                    hideTabs: false,
+                                    hideToolbar: false
+                                };
+                            
+                            // Create a viz object and embed it in the container div.
+                            var viz = new tableau.Viz(containerDiv, url, options); 
+                        }
+                    </script>
+                
+                </div>
+            </body>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

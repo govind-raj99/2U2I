@@ -1,0 +1,708 @@
+{% extends "layouts/basee.html" %}
+
+{% block title %} Download {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<!-- Specific tag HERE  -->
+{% load mycustom_tags %}
+
+{% now "Ym-" as todaysDate %}
+{% now "b" as todaysMonth %}
+{% now "n" as todaysMonthAsNum %}
+{% monthToNum todaysMonth  as todaysMonthAsNum %}
+
+<!--<br>
+{{ todaysMonthAsNum|add:"-2"}}<br>
+
+-monthnumber : {{ todaysMonthAsNum|month_name }}<br>
+--{% minustwo todaysMonthAsNum %}--
+--{% minusone todaysMonthAsNum %}--
+{% now "Y" as current_year %}
+ <br><br>
+It is3 {% now "M" %}
+<br><br>
+Copyright {{ current_year }}-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<!-- stylesheet for the w3 class -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style>
+
+        #div-desc {margin-left:70px; margin-right:70px; margin-top:70px;}
+        .desc {font-size: 100%;}
+
+    table.GeneratedTable {
+      width: 87%;
+      background-color: #ffffff;
+      border-collapse: collapse;
+      border-width: 0px;
+      color: #000000;
+      margin-right:20px;
+    }
+
+    table.GeneratedTable td, table.GeneratedTable th {
+      border-width: 0px;
+      padding: 5px;
+      text-align: center;
+    }
+
+    table.GeneratedTable thead {
+      background-color: #1e81c8;
+    }
+
+    table.GeneratedTable th {
+        color:white;
+    }
+
+    table.GeneratedTable tr td {
+        padding: 10px 30px 10px 30px;
+        border-bottom: 1px solid gray;
+    }
+        .td-border {
+                border:2px solid grey;
+                vertical-align: top;
+        }
+
+    .h1-style {
+        border-bottom: 3px solid rgba(170, 172, 173, 0.8);
+        margin-bottom:80px;
+    }
+
+        #download {
+                font-size:27px;
+                color: rgba(66, 135, 245, 0.7);
+        }
+        #download:hover {
+                color: #0072ce;
+        }
+
+        @media screen and (max-width: 600px) {
+                .desc {
+                        font-size: 80%;}
+                #div-desc {
+                        margin-left:20px;
+                        margin-right:20px;
+                        margin-top:70px; }
+                .pg-title {
+                        font-size: 120nurulfakhi %;}
+
+        }
+ </style>
+
+
+
+
+<div class="col-lg-12 d-sm-flex flex-row align-items-center flex-0">
+    <div class="d-block mb-3 mb-sm-0" id="div-desc">
+        <div class="h5 fw-normal mb-2 h1-style w3-animate-bottom">
+            <h1 class="w3-animate-bottom pg-title">Monthly Report</h1>
+        </div>
+                {% if request.user.is_superuser %}
+                        <article id="faq134" style="margin-top:30px;" class="desc">
+                                Below are the latest 3 months InSight report for all users under {{company.name}}. You may click to view,
+                                or download the monthly ViSight PDF reports. If you have not installed an
+                                Adobe PDF reader on your computer, please click this
+                                <a href="http://get.adobe.com/reader/" style="color:#f58200; font-weight:600;" target="_blank">link</a>
+                                to follow the installation. <!--<a href="http://get.adobe.com/reader/" style="color: rgb(238, 114, 2)" target="_blank">http://get.adobe.com/reader/</a>-->
+                        </article>
+                {% else %}
+                        <article id="faq134" style="margin-top:30px;" class="desc">
+                                Below are your latest 3 months InSight report. You may click to view,
+                                or download the monthly ViSight PDF reports. If you have not installed an
+                                Adobe PDF reader on your computer, please click this
+                                <a href="http://get.adobe.com/reader/" style="color:#f58200; font-weight:600;" target="_blank">link</a>
+                                to follow the installation. <!--<a href="http://get.adobe.com/reader/" style="color: rgb(238, 114, 2)" target="_blank">http://get.adobe.com/reader/</a>-->
+                        </article>
+                {% endif %}
+    </div>
+</div>
+
+<br><br>
+
+
+
+     <div class="col-lg-12" style="margin-left:70px; margin-right:100px;overflow-x:auto; padding-bottom:15em;">
+                <div style="width:90%;">
+                        <form class="navbar-search-input justify-content-center" onsubmit="return executeSearch();">
+                                <input type="text" class="form-control"  name="acc" id="id_acc" placeholder="Search Account Number">
+                        </form>
+                </div><br><br>
+
+            {% if request.user.is_superuser %}
+            {% csrf_token %}
+                <div style="overflow-x:auto; margin-right:2em;">
+                <table class="table table-striped small table-bordered GeneratedTable" style="border:1px solid black;background:white;">
+                        <thead>
+                                <tr>
+                                        <th>October</th>
+                                        <th>November</th>
+                                        <th>December</th>
+                                        <th>January</th>
+                                        <th>February</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                                {% for i in "x"|rjust:"12" %}
+                                        {% with l5m=todaysMonthAsNum|add:"-5" %}
+                                        {% with l4m=todaysMonthAsNum|add:"-4" %}
+                                        {% with l3m=todaysMonthAsNum|add:"-3" %}
+                                        {% with l2m=todaysMonthAsNum|add:"-2" %}
+                                        {% with lm=todaysMonthAsNum|add:"-1" %}
+
+                                                <!-- Last 5 months -->
+                                                <!-- March and l5m is October-->
+                                                {% if todaysMonthAsNum == 3 and l5m == -2 %}
+                                                {% with l5m=1 %} <!-- Just to ensure this will be the forst column -->
+                                                {% ifequal forloop.counter l5m %}
+                                                        <td class="td-border">
+                                                                {% with y=10|stringformat:"02d" %}
+                                                                {% with ty=current_year|add:"-1"|stringformat:"s" %}
+                                                                {% with template="f"|add:ty|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank" >{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                {% endifequal %}
+                                                {% endwith %}
+                                                <!-- if April and last 5 month is Nov -->
+                                                {% elif todaysMonthAsNum == 4 and l5m == -1 %}
+                                                {% with l5m=1 %} <!-- ensuring first column -->
+                                                {% ifequal forloop.counter l5m %}
+                                                        <td class="td-border">
+                                                                {% with y=11|stringformat:"02d" %}
+                                                                {% with ty=current_year|add:"-1"|stringformat:"s" %}
+                                                                {% with template="f"|add:ty|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank" >{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                        </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                {% endifequal %}
+                                                {% endwith %}
+                                                <!-- if May and last 5 month is Dec -->
+                                                {% elif todaysMonthAsNum == 5 and l5m == 0 %}
+                                                {% with l5m=1 %} <!-- ensuring first column -->
+                                                {% ifequal forloop.counter l5m %}
+                                                        <td class="td-border">
+                                                                {% with y=12|stringformat:"02d" %}
+                                                                {% with ty=current_year|add:"-1"|stringformat:"s" %}
+                                                                {% with template="f"|add:ty|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank" >{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                        </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                {% endifequal %}
+                                                {% endwith %}
+                                                <!-- if Feb and last 5 month is Sept -->
+                                                {% elif todaysMonthAsNum == 2 and l5m == -3 %}
+                                                {% with l5m=1 %} <!-- ensuring first column -->
+                                                {% ifequal forloop.counter l5m %}
+                                                        <td class="td-border">
+                                                                {% with y=09|stringformat:"02d" %}
+                                                                {% with ty=current_year|add:"-1"|stringformat:"s" %}
+                                                                {% with template="f"|add:ty|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank" >{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                        </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                {% endifequal %}
+                                                {% endwith %}
+                                                <!-- if Jan and last 5 month is August -->
+                                                {% elif todaysMonthAsNum == 1 and l5m == -4 %}
+                                                {% with l5m=1 %} <!-- ensuring first column -->
+                                                {% ifequal forloop.counter l5m %}
+                                                        <td class="td-border">
+                                                                {% with y=08|stringformat:"02d" %}
+                                                                {% with ty=current_year|add:"-1"|stringformat:"s" %}
+                                                                {% with template="f"|add:ty|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank" >{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                        </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                {% endifequal %}
+                                                {% endwith %}
+                                                <!-- if any other months for l5m -->
+                                                {% else %}
+                                                        {% ifequal forloop.counter l5m %}
+                                                        <td class="td-border">
+                                                                {% with y=forloop.counter|stringformat:"02d" %}
+                                                                {% with template="f"|add:current_year|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        <!-- the ifequal below checks id 202202 == f202202-->
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        <!-- <p>{{ template|slice:"1:"}}----- {{ plist|slice:":6"}}</p> -->
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;"><!-- {{ plist}} -->
+                                                                                                <!--a href="/static/analytics/{{ plist }}">{{ plist }}</a-->
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank" >{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                                <!-- | {{ plist|slice:":-4" }}.pdf-->
+                                                                                        </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                        {% endifequal %}
+                                                {% endif %}
+
+
+
+                                                <!-- Last 4 months -->
+                                                <!-- March and l4m is November-->
+                                                {% if todaysMonthAsNum == 3 and l4m == -1 %}
+                                                {% with l4m=1 %} <!-- Just to ensure this will be the forst column -->
+                                                {% ifequal forloop.counter l4m %}
+                                                        <td class="td-border">
+                                                                {% with y=11|stringformat:"02d" %}
+                                                                {% with ty=current_year|add:"-1"|stringformat:"s" %}
+                                                                {% with template="f"|add:ty|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank" >{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                {% endifequal %}
+                                                {% endwith %}
+                                                <!-- if April and last 4 month is December -->
+                                                {% elif todaysMonthAsNum == 4 and l4m == 0 %}
+                                                {% with l4m=1 %} <!-- ensuring first column -->
+                                                {% ifequal forloop.counter l4m %}
+                                                        <td class="td-border">
+                                                                {% with y=12|stringformat:"02d" %}
+                                                                {% with ty=current_year|add:"-1"|stringformat:"s" %}
+                                                                {% with template="f"|add:ty|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank" >{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                        </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                {% endifequal %}
+                                                {% endwith %}
+                                                <!-- if Feb and last 4 month is Oct -->
+                                                {% elif todaysMonthAsNum == 2 and l4m == -2 %}
+                                                {% with l4m=1 %} <!-- ensuring first column -->
+                                                {% ifequal forloop.counter l4m %}
+                                                        <td class="td-border">
+                                                                {% with y=10|stringformat:"02d" %}
+                                                                {% with ty=current_year|add:"-1"|stringformat:"s" %}
+                                                                {% with template="f"|add:ty|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank" >{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                        </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                {% endifequal %}
+                                                {% endwith %}
+                                                <!-- if Jan and last 4 month is September -->
+                                                {% elif todaysMonthAsNum == 1 and l3m == -3 %}
+                                                {% with l4m=1 %} <!-- ensuring first column -->
+                                                {% ifequal forloop.counter l4m %}
+                                                        <td class="td-border">
+                                                                {% with y=09|stringformat:"02d" %}
+                                                                {% with ty=current_year|add:"-1"|stringformat:"s" %}
+                                                                {% with template="f"|add:ty|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank" >{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                        </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                {% endifequal %}
+                                                {% endwith %}
+                                                <!-- if any other months for l4m -->
+                                                {% else %}
+                                                        {% ifequal forloop.counter l4m %}
+                                                        <td class="td-border">
+                                                                {% with y=forloop.counter|stringformat:"02d" %}
+                                                                {% with template="f"|add:current_year|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        <!-- the ifequal below checks id 202202 == f202202-->
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        <!-- <p>{{ template|slice:"1:"}}----- {{ plist|slice:":6"}}</p> -->
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;"><!-- {{ plist}} -->
+                                                                                                <!--a href="/static/analytics/{{ plist }}">{{ plist }}</a-->
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank" >{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                                <!-- | {{ plist|slice:":-4" }}.pdf-->
+                                                                                        </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                        {% endifequal %}
+                                                {% endif %}
+
+
+
+                                                <!-- Last 3 months -->
+                                                <!-- if March and last 3 months is Dec -->
+                                                {% if todaysMonthAsNum == 3 and l3m == 0 %}
+                                                        {% with l3m=1 %} <!-- Just to ensure this will be the forst column -->
+                                                        {% ifequal forloop.counter l3m %}
+                                                        <td class="td-border">
+                                                                {% with y=12|stringformat:"02d" %}
+                                                                {% with ty=current_year|add:"-1"|stringformat:"s" %}
+                                                                {% with template="f"|add:ty|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank" >{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                        {% endifequal %}
+                                                        {% endwith %}
+                                                <!-- if Feb and last 3 month is Nov -->
+                                                {% elif todaysMonthAsNum == 2 and l3m == -1 %}
+                                                        {% with l3m=1 %} <!-- ensuring first column -->
+                                                        {% ifequal forloop.counter l3m %}
+                                                        <td class="td-border">
+                                                                {% with y=11|stringformat:"02d" %}
+                                                                {% with ty=current_year|add:"-1"|stringformat:"s" %}
+                                                                {% with template="f"|add:ty|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank" >{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                        </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                        {% endifequal %}
+                                                        {% endwith %}
+                                                <!-- if Jan and last 3 month is Oct -->
+                                                {% elif todaysMonthAsNum == 1 and l3m == -2 %}
+                                                        {% with l3m=1 %} <!-- ensuring first column -->
+                                                        {% ifequal forloop.counter l3m %}
+                                                        <td class="td-border">
+                                                                {% with y=10|stringformat:"02d" %}
+                                                                {% with ty=current_year|add:"-1"|stringformat:"s" %}
+                                                                {% with template="f"|add:ty|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank" >{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                        </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                        {% endifequal %}
+                                                        {% endwith %}
+                                                <!-- if any other months for l3m -->
+                                                {% else %}
+                                                        {% ifequal forloop.counter l3m %}
+                                                        <td class="td-border">
+                                                                {% with y=forloop.counter|stringformat:"02d" %}
+                                                                {% with template="f"|add:current_year|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        <!-- the ifequal below checks id 202202 == f202202-->
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        <!-- <p>{{ template|slice:"1:"}}----- {{ plist|slice:":6"}}</p> -->
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;"><!-- {{ plist}} -->
+                                                                                                <!--a href="/static/analytics/{{ plist }}">{{ plist }}</a-->
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank" >{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                                <!-- | {{ plist|slice:":-4" }}.pdf-->
+                                                                                        </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                        {% endifequal %}
+                                                {% endif %}
+
+
+
+
+                                                <!-- Last 2 months -->
+                                                <!-- if Feb and last 2 months is Dec -->
+                                                {% if todaysMonthAsNum == 2 and l2m == 0 %}
+                                                        {% with l2m=2 %} <!-- forcing this to be the second column -->
+                                                        {% ifequal forloop.counter l2m %}
+                                                        <td class="td-broder">
+                                                                {% with y=12|stringformat:"02d" %}
+                                                                {% with ty=current_year|add:"-1"|stringformat:"s" %}
+                                                                {% with template="f"|add:ty|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank" >{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                        </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                        {% endifequal %}
+                                                        {% endwith %}
+                                                <!-- if Jan and last 2 month is Nov -->
+                                                {% elif todaysMonthAsNum == 1 and l3m == -1 %}
+                                                        {% with l2m=1 %} <!-- forcing this to be the second column -->
+                                                        {% ifequal forloop.counter l2m %}
+                                                        <td class="td-border">
+                                                                {% with y=11|stringformat:"02d" %}
+                                                                {% with ty=current_year|add:"-1"|stringformat:"s" %}
+                                                                {% with template="f"|add:ty|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;">
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank" >{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                        </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                        {% endifequal %}
+                                                        {% endwith %}
+                                                {% else %}
+                                                        <!-- any other months -->
+                                                        {% ifequal forloop.counter l2m %}
+                                                        <td class="td-border">
+                                                                {% with y=forloop.counter|stringformat:"02d" %}
+                                                                {% with template="f"|add:current_year|add:y %}
+                                                                        {% for plist in pdfFileList %}
+                                                                        {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                        {% if company.name == plist|slice:"21:"|get_len %}
+                                                                                <!-- <p>{{ template|slice:"1:"}}----- {{ plist|slice:":6"}}</p> -->
+                                                                                <table align="center">
+                                                                                <tr>
+                                                                                        <td style="vertical-align: top; border:0px; padding:10px;"><!-- {{ plist}} -->
+                                                                                                <!--a href="/static/analytics/{{ plist }}">{{ plist }}</a-->
+                                                                                                <a href="/static/PDFFile/{{ plist }}" target ="_blank">{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                                <!-- | {{ plist|slice:":-4" }}.pdf-->
+                                                                                        </td>
+                                                                                </tr>
+                                                                                </table>
+                                                                        {% endif %}
+                                                                        {% endifequal %}
+                                                                        {% endfor %}
+                                                                {% endwith %}
+                                                                {% endwith %}
+                                                        </td>
+                                                        {% endifequal %}
+                                                {% endif %}
+
+
+                                                <!-- last month -->
+                                                {% ifequal forloop.counter lm %}
+                                                <td class="td-border">
+                                                        {% with y=forloop.counter|stringformat:"02d" %}
+                                                        {% with template="f"|add:current_year|add:y %}
+                                                                {% for plist in pdfFileList %}
+                                                                {% ifequal plist|slice:":6" template|slice:"1:" %}
+                                                                <!-- <p>{{ template|slice:"1:"}}----- {{ plist|slice:":6"}}</p> -->
+                                                                {% if company.name == plist|slice:"21:"|get_len %}
+                                                                        <table align="center">
+                                                                        <tr>
+                                                                                <td style="vertical-align: top; border:0px; padding:10px;"><!-- {{ plist}} -->
+                                                                                        <!--a href="/static/analytics/{{ plist }}">{{ plist }}</a-->
+                                                                                        <a href="/static/PDFFile/{{ plist }}" target ="_blank">{{ plist|slice:"7:27"|get_len }}</a>
+                                                                                        <!-- | {{ plist|slice:":-4" }}.pdf-->
+                                                                                </td>
+                                                                        </tr>
+                                                                        </table>
+                                                                {% endif %}
+                                                                {% endifequal %}
+                                                                {% endfor %}
+                                                        {% endwith %}
+                                                        {% endwith %}
+                                                </td>
+                                                {% endifequal %}
+                                        {% endwith %}
+                                        {% endwith %}
+                                        {% endwith %}
+                                        {% endwith %}
+                                        {% endwith %}
+                                {% endfor %}
+                        </tr>
+                        </tbody>
+                </table><br/><br/>
+                </div>
+
+                {% else %}
+
+                     <p> You are not Super User, hence the monthly reports will not be shown. </p>
+        {% endif %}
+        </div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

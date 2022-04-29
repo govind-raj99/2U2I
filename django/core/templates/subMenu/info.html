@@ -1,0 +1,147 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Intro {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    
+ <div class="col-lg-12 d-sm-flex flex-row align-items-center flex-0">
+    <div class="d-block mb-3 mb-sm-0">
+        
+        <div class="h4 fw-normal mb-2"><br>Info</div>
+        
+        <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="mdi mdi-chart-bar mr-2 mb-2" style="background-color: #EE7202;  border:1; color:white;" data-toggle="modal" data-target="#modal" onclick="myinfo('info1')"> Marketing</button>
+            
+
+            <button type="button" class="mdi mdi-twitter-retweet mr-2 mb-2" style="background-color: #EE7202; border:1;  color:white;" data-toggle="modal" data-target="#modal" onclick="myinfo('info2')"> Operations</button>
+           
+            
+            <button type="button" class="mdi mdi-headset mr-2 mb-2" style="background-color: #EE7202; border:1; color:white;" data-toggle="modal" data-target="#modal" onclick="myinfo('info3')"> Customer Services</button>
+
+        </div>
+
+        <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="modalTitle" class="modal-title">Info</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modal-body">
+                        Info of Menus
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .hidden-info-text {
+                display:none;
+            }
+        </style>
+
+        <div id="info1" class = 'hidden-info-text' data-title="">
+            <div id="breadCrumb">
+                <h1>Marketing</h1>
+                </div>
+                <article id="faq130">
+                <p>How effective are your marketing activities?&nbsp; Is your marketing investment providing the return of sales you expect?</p>
+                <p>It is critical for a Marketeer to understand immediately the response during your marketing campaign. Utilising TM ViSight Reports would be the most efficient way to measure the effectiveness of your campaign activities and to identify geographically, where your campaign is being successful. More importantly, where you campaign it is not being successful - enabling you to protect your ROI and change activities where necessary.</p>
+                <p>The most recent information will be available to you at 8:00am everyday enhancing your management tools, enabling you to make immediate decisions to maximize the value of your marketing expenses.</p>
+                <p>Example: Is the marketing campaign generating the number of responses as expected? If not, you may want to evaluate the campaign whether the messages are making the impact you want, have chosen the right channel or have you reached your target audience?</p>
+                <h3>State Region Summary</h3>
+                <p>State Region Summary provides most updated information on where your response is coming from by State and Region. The TM ViSight report allows you to easily compare the response with the population within the State. If you have implemented a nationwide campaign, this will allow you to understand which State gives the most response to your campaign and which States generate lesser calls considering the number of population.</p>
+                <p>For any campaign to be successful you may want to ensure your company have enough resources within these areas to manage response levels and subsequently successful sales.</p>
+                <h3>Exchange Area Summary</h3>
+                <p>This report shows exactly where the callers are originating from with each region, city and drilling down further to suburb. The report enables you to determine if the response is from the target market, compare response to actual sales, and which area did not respond.</p>
+                <p>Example: If you have a ground activity in Bangsar yesterday, do you see an increase in number of calls coming from Bangsar? If you have implemented a nationwide campaign, you can easily identify where the responses are coming from and what areas we not so successful.&nbsp;</p>
+                
+                <body onload="initViz();">   
+                    <table class ="center">
+                        <tr>
+                            <td> 
+                                <div class="card-body p-2" id="vizContainer">
+                                    <script type="text/javascript"
+                                    src="https://online.tableau.com/javascripts/api/tableau-2.8.0.min.js"></script>
+                                    <script type="text/javascript">
+                                        function initViz() {
+                                            var containerDiv = document.getElementById("vizContainer"),
+                                                url = "https://prod-apnortheast-a.online.tableau.com/t/lazul2/views/CallSample/StoryCallerSample?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link",
+                                                options = {
+                                                    hideTabs: true,
+                                                    onFirstInteractive: function () {
+                                                        console.log("Run this code when the viz has finished loading.");
+                                                    }
+                                                };
+                            
+                                            var viz = new tableau.Viz(containerDiv, url, options);
+                                        // Create a viz object and embed it in the container div.
+                                        }
+                                    </script>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </body>
+            </article>
+
+        </div>
+        <div id="info2" class = 'hidden-info-text' data-title="">
+            <div id="breadCrumb">
+                <h1>Operations</h1>
+                </div>
+                <article id="faq135">
+                <p>When business is tough it is important the right infrastructure is in place and your processes are operating efficiently.</p>
+                <p>This section of TM ViSight Reports will assist you in managing your day-to-day operations and effective processes. Enabling you to manage staffing resources and facilities.&nbsp;</p>
+                <h3>Time of Day</h3>
+                <p>This report identifies complete and incomplete calls by hour enabling you to identify peak calling times at particular times of day and highlighting incomplete calls. Incomplete calls can result in a lost sale or unhappy customers. This TM ViSight Report is designed to assist you to manage staffing resource and facilities (ie do you have sufficient telephone lines). To reduce unattended calls, action can be taken immediately from the most updated information.</p>
+                <h3>Short Calls</h3>
+                <p>Short calls are considered as ineffective calls as information cannnot be successfully communicated to your callers. The Short Calls report identifies calls received in range of 0-15 seconds, 16-30 seconds, 31-60 seconds, 1 minute to 2 minutes and 2 minutes and above.&nbsp;</p>
+                <p>If the short calls are reduced and more calls are being effectively answered this will result in better customer service delivery, improve customer retention, and increase revenue with more calls being converted into sales.</p>
+                </article>
+        </div>
+        <div id="info3" class = 'hidden-info-text' data-title="">
+            <div id="breadCrumb">
+                <div id="breadCrumb">
+                <h1>Customer Services</h1>
+                </div>
+                <article id="faq125">
+                <p>Your organisation has invested to ensure Customer Service is provided.&nbsp; To lose a customer is costly and the need to 'win back' a customer is expensive.</p>
+                <p>The TM ViSight Reports structured in this section are specially designed for Customer Service and Call Centre Managers in order to help in day to day operations and process within your call centre environment. The information will help you manage staffing resources based on caller demand, plan for staff coverage during peak and off-peak periods, and monitor unusual calling behaviours.</p>
+                <h3>Top Views</h3>
+                <p>The TM ViSight Top View Report identifies the most frequent callers, longest call duration and most expensive calls. You may select a specific period by selecting the date range. The report will assist you in monitoring the call activities and ensure staff are spending time servicing calls coming into the call centre and KPI's are achieved. (Example:&nbsp; Why is this customer calling us so often? Is it necessary for these calls to be taking so long? Is additional staff training required?).</p>
+                <h3>Answerpoint Summary</h3>
+                <p>To ensure customer expectations are meet, TM TollFree subscribers are using the network features transferring calls to another answerpoint on busy, no answer, by region, or by percentage. This TM ViSight Report provides you a complete view of the number of calls being transferred according to the features subscribed.</p>
+                <p>If a TollFree number is being answered in more than one location, the answering location (Answerpoint) will be listed in this report with the complete and incomplete call information. The report enables you to manage resources in multiple locations and monitor each location performance by comparing average call duration and call volumes. .</p>
+                <h3>Missed Calls</h3>
+                <p>The Missed Calls Report shows the number of customers/prospects unable to reach your organisation. This information will assist you in identify the cause and allow you to take immediate action. &nbsp;Utilising this Management Tool will reduce the missed calls and result in better performance in your call centre, will enhance your customer service levels and ensure a sales opportunity is never lost.</p>
+                </article>
+            </div>
+        </div>
+
+
+        <script>
+            function myinfo(infoId) {
+                var temp = document.getElementById(infoId);
+
+                var title = temp.dataset.title;
+                var content = temp.innerHTML;
+                // alert(document.getElementById("modalTitle").innerHTML);return;
+                document.getElementById("modalTitle").innerHTML = title;
+                document.getElementById("modal-body").innerHTML = content;
+            }
+        </script> 
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,238 @@
+{% extends "layouts/base-fullscreen.html" %}
+{% load static %}
+
+{% block title %} Sign In {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- CSS style here as the template didn't use any css  -->
+<!-- 210406 yan added some style for login page  -->
+        <style>
+            
+            .logoAlign{
+                margin-left: 10%;
+            }
+
+            .headerText{
+                color: #ee7202;
+                margin-right: 0;
+                /*margin-top: -40px;*/
+                padding-top: 0px;
+            }
+
+            .footerText{
+                color: white;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .infoText{
+                color: #ee7202;
+                text-align: center;
+                margin-top: 30px;
+            }
+
+            .bg-img {
+                background-image: url(/static/assets/img/homepage/tmone_smartcity.png);
+                min-height: 100%;
+                background-position: center;
+                background-size: cover;
+            }
+
+            .upper-wrapper {
+                width: 70%;
+                overflow: hidden;
+                margin-left:80px;
+                margin-top:50px;
+            }
+            .uwrapper-1{
+                width:15%;
+                float:left;
+                padding-left:0px;
+            }
+            .uwrapper-2{
+                width:45%;
+                float:left;    
+                height:100%;
+            }
+            .insight{
+                color: #ff6600;
+                font-size: 110px;
+                font-weight: 800;
+            }
+
+            .forget-pwd {
+                font-size:10px;
+                color:blue;
+            }
+
+            /* Style for login button */
+            /* Source: https://codepen.io/yuhomyan/pen/LYNVVNO */
+            .login2 {
+                background-color:#ee7202;
+                opacity:1; }
+
+            .custom-btn {
+                width: 330px;
+                height: 40px;
+                padding: 10px 20px;
+                border: 2px solid #ee7202;
+                font-weight: 600;
+                font-size:120%;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                position: relative;
+                display: inline-block; }
+                /* 6 */
+            .login-btn {
+                color: #fff;
+                line-height: 42px;
+                background-color:#ee7202;
+                opacity:1;
+                padding: 0;
+                border: none; }
+            .login-btn span {
+                position: relative;
+                display: block;
+                width: 100%;
+                height: 100%; }
+            .login-btn:before,
+            .login-btn:after {
+                position: absolute;
+                content: "";
+                height: 0%;
+                width: 3px;
+                background: #ee7202; }
+            .login-btn:before {
+                right: 0;
+                top: 0;
+                transition: all 500ms ease;}
+            .login-btn:after {
+                left: 0;
+                bottom: 0;
+                transition: all 500ms ease; }
+            .login-btn:hover{
+                color: #000;
+                background: transparent;
+                background-color: white;
+                /*background-color: #ee7202;*/ }
+            .login-btn:hover:before {
+                transition: all 500ms ease;
+                height: 100%; }
+            .login-btn:hover:after {
+                transition: all 500ms ease;
+                height: 100%; }
+            .login-btn span:before,
+            .login-btn span:after {
+                position: absolute;
+                content: "";
+                background: #ee7202; }
+            .login-btn span:before {
+                left: 0;
+                top: 0;
+                width: 0%;
+                height: 3px;
+                transition: all 500ms ease; }
+            .login-btn span:after {
+                right: 0;
+                bottom: 0;
+                width: 0%;
+                height: 3px;
+                transition: all 500ms ease; }
+            .login-btn span:hover:before {
+                width: 100%; }
+            .login-btn span:hover:after {
+                width: 100%; }
+           
+        </style>
+
+
+    <main class="bg-img">
+    
+        <!-- TM ONE logo (yan)  -->
+        <div class="upper-wrapper">
+            <div class="uwrapper-1">
+                <a href="https://www.tmone.com.my/">
+                    <img src="{% static '/assets/img/tmlogo.png' %}" class="" width="95%">
+                </a>
+            </div>
+            <div class="uwrapper-2">
+                <a style="font-size:16px;font-weight:800;"  class="headerText">Hyperconnected Ecosystem Made Possible</a><br>
+                <h1 style="display:inline-block;" class="insight">InSight</h1>
+            </div>
+        </div>
+
+        <!-- Section -->
+        <section class="d-flex align-items-center my-2 mt-lg-2 mb-lg-2">
+            <div class ="container-fluid">
+            <div class="row justify-content-center">
+                <div>
+                    <!-- changes-NSO210630  -->
+                        <div class="col-lg-4 p-2 d-flex align-items-center justify-content-right" style="float:right; margin-bottom:140px;">
+                            <div class="bg-white9 shadow-soft border border-light p-4 p-lg-5 w-100 fmxw-400">
+
+                                <form method="post" action="" class="mt-4">
+                                    
+                                    {% csrf_token %}
+
+                                    <!-- Form -->
+                                    <div class="form-group mb-4" style="border-radius: 0px;">
+                                        <!--<label for="email">Username</label>-->
+                                        <div class="input-group" style="border-radius: 0px;">
+                                            <span class="input-group-text" id="basic-addon1" style="border-radius:0px 0px 0px 0px;"><span class="fas fa-user-circle"></span></span>
+                                            {{ form.username }}
+                                        </div>  
+                                    </div>
+                                    <!-- End of Form -->
+                                    <div class="form-group">
+                                        <!-- Form -->
+                                        <div class="form-group mb-4">
+                                            <!--<label for="password">Password</label>-->
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon2" style="border-radius: 0px;"><span class="fas fa-unlock-alt" ></span></span>
+                                                {{ form.password }}
+                                            </div>  
+                                            <!-- changes-NSO210609  -->
+                                            <div class="form-check" style="float:right">
+                                                <a href="{% url 'password_reset' %}" class="small text-right forget-pwd">Forgot password?</a>
+                                            </div>
+                                        </div>
+                                        <!-- End of Form -->
+                                        <div class="d-flex justify-content-between align-items-top mb-4">
+                                            <!--<div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="remember">
+                                                <label class="form-check-label mb-0" for="remember">
+                                                Remember me
+                                                </label>
+                                            </div>-->
+                                            <!-- changes-NSO210609  -->
+                                            <!--div class="form-check">
+                                                <a href="{% url 'add_profile' %}" class="small text-right">Register</a>
+                                            </div-->
+                                        </div>
+                                    </div>
+                                    <div class="d-grid">
+                                        <!--<button type="submit" name="login" class="btn btn-dark login2">Login</button>-->
+                                        <button  type="submit" name="login" class="btn custom-btn login-btn" style="border-radius:0px;"><span>Login</span></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+            </div>
+        </section>
+    
+        <footer style="background-color: #33384b; height:37px; position:fixed; bottom:0; width:100%;">
+                <p class="footerText" style="margin-top:10px; font-size:13px; text-align:right; padding-right:20px;">© 2021 Copyright Telekom Malaysia</p>
+        </footer>
+    </main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

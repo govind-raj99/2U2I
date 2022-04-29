@@ -1,0 +1,83 @@
+{% extends "layouts/basee.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<head>
+    <style>   
+        table.center {
+        margin-left: auto; 
+        margin-right: auto;
+        }
+    </style>
+</head>
+    
+    <body>
+
+    <div class="row justify-content-md-right fmxh-1200 ">
+        <div class="col-12 col-xl-12 mb-2">    
+            <div class="card bg-primary-alt">
+            <!-- <div ><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div> -->
+            <!-- <tableau sample data (Method 3 - API)  -->
+ <!--
+                                         src="http://172.20.210.65:8080/javascripts/api/tableau-2.3.0.min.js"></script>
+                                        src="https://online.tableau.com/javascripts/api/tableau-2.3.0.min.js"></script>
+    
+                                                    url = "http://172.20.210.65:8080/views/TollfreeDashboard/StoryCallerSample?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&:embed=y",
+                                                    url = "http://172.20.210.65:8080/views/TollfreeDashboard/StoryCallerSample?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&:embed=n",
+                                                    url = "{{ tableauURL }}",
+-->               
+                    <body onload="initViz();">   
+                        <table class ="center">
+                            <tr>
+                                <td> <!-- test url = "{{ tableauURL }}" Username : {{ user.username }} statusTableau : {{ statusTableau }} -->
+                                    {% if statusTableau == ticketID %}
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-12 text-center d-flex align-items-center justify-content-center">
+                                                <div>
+                                                    <!--img class="img-fluid w-75" src="/static/assets/img/illustrations/404.svg" alt="404 not found"-->
+                                                   <br><br> <h1 class="mt-5">Your Username have <span class="fw-bolder text-primary">No Access</span> to Tableau Dashboard</h1>
+                                                    <p class="lead my-4">Please contact your administrator.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    <div class="card-body p-2" id="vizContainer">
+                                        <script type="text/javascript"
+                                        src="https://online.tableau.com/javascripts/api/tableau-2.3.0.min.js"></script>
+                                        <script type="text/javascript">
+                                            function initViz() {
+                                                var containerDiv = document.getElementById("vizContainer"),
+                                                url = "{{ tableauURL }}",
+                                                    options = {
+                                                        hideTabs: true,
+                                                        onFirstInteractive: function () {
+                                                            console.log("Run this code when the viz has finished loading.");
+                                                        }
+                                                    };
+                                        
+                                                var viz = new tableau.Viz(containerDiv, url, options);
+                                            // Create a viz object and embed it in the container div.
+                                            }
+                                        </script>
+                                    </div>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+                    </body>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

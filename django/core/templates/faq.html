@@ -1,0 +1,316 @@
+{% extends "layouts/basee.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+    <!--div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+        <div class="btn-toolbar dropdown">
+            <button class="btn btn-dark btn-sm me-2 dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="fas fa-plus me-2"></span>New Task
+            </button>
+            <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-0">
+                <a class="dropdown-item fw-normal rounded-top" href="#"><span class="fas fa-tasks"></span>New Task</a>
+                <a class="dropdown-item fw-normal" href="#"><span class="fas fa-cloud-upload-alt"></span>Upload Files</a>
+                <a class="dropdown-item fw-normal" href="#"><span class="fas fa-user-shield"></span>Preview Security</a>
+                <div role="separator" class="dropdown-divider my-0"></div>
+                <a class="dropdown-item fw-normal rounded-bottom" href="#"><span class="fas fa-rocket text-danger"></span>Upgrade to Pro</a>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-primary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-primary">Export</button>
+        </div>
+    </div-->
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FAQ PAGE</title>
+        <!--<link type="text/css" href="/static/assets/css/style.css" rel="stylesheet">-->
+        <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+        <!-- stylesheet for the w3 class -->
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <style>
+            .h1-style {
+                border-bottom: 3px solid rgba(170, 172, 173, 0.8);
+                margin-bottom:80px;
+                margin-top:70px;
+                width:90%;
+                margin-left:auto;
+                margin-right:auto;
+                font-weight: 500;
+            }
+            .faq-heading{
+                border-bottom: #777;
+                padding: 20px 60px;
+                border-top: 1px solid rgb(12, 12, 12);
+            }
+            .faq-subheading{
+                border-bottom: #777;
+                padding: 20px 60px;
+            }
+            .faq-container{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            }
+            .hr-line{
+            width: 60%;
+            margin: auto;
+            }
+            /* Style the buttons that are used to open and close the faq-page body */
+            .faq-page {
+                /* background-color: #eee; */
+                color: #444;
+                cursor: pointer;
+                padding: 30px 20px;
+                width: 80%;
+                border: none;
+                outline: none;
+                transition: 0.4s;
+                margin: auto;
+                font-size: 18px;
+
+            }
+            .faq-body{
+                margin: auto;
+                /* text-align: center; */
+                width: 80%; 
+                padding: auto; 
+            }
+            /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+            .faq-page.active,
+            .faq-page:hover {
+                background-color: #F9F9F9;
+            }
+            /* Style the faq-page panel. Note: hidden by default */
+            .faq-body {
+                padding: 0 18px;
+                background-color: white;
+                display: none;
+                overflow: hidden;
+            }
+            .faq-page:after {
+                content: '\02795';
+                /* Unicode character for "plus" sign (+) */
+                font-size: 13px;
+                color: #777;
+                float: right;
+                margin-left: 5px;
+            }
+            .faq-page.active:after {
+                content: "\2796";
+                /* Unicode character for "minus" sign (-) */
+            }
+            .nav-tabs .nav-link.disabled {
+                color: #6c757d;
+                background-color: transparent;
+                border-color: transparent; }
+            
+            /* Style for the FAQ tabs */
+            button:focus,
+            input:focus,
+            textarea:focus,
+            select:focus {
+                outline: none; }
+            .tabs {
+                display: block;
+                display: -webkit-flex;
+                display: -moz-flex;
+                display: flex;
+                -webkit-flex-wrap: wrap;
+                -moz-flex-wrap: wrap;
+                flex-wrap: wrap;
+                margin: 0;
+                overflow: hidden; }
+            .tabs [class^="tab"] label,
+            .tabs [class*=" tab"] label {
+                color: #efedef;
+                cursor: pointer;
+                display: block;
+                font-size: 1.1em;
+                font-weight: 300;
+                line-height: 1em;
+                padding: 2rem 0;
+                text-align: center; }
+            .tabs [class^="tab"] [type="radio"],
+            .tabs [class*=" tab"] [type="radio"] {
+                border-bottom: 1px solid rgba(239, 237, 239, 0.5);
+                cursor: pointer;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                display: block;
+                width: 100%;
+                -webkit-transition: all 0.3s ease-in-out;
+                -moz-transition: all 0.3s ease-in-out;
+                -o-transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out; }
+            .tabs [class^="tab"] [type="radio"]:hover, .tabs [class^="tab"] [type="radio"]:focus,
+            .tabs [class*=" tab"] [type="radio"]:hover,
+            .tabs [class*=" tab"] [type="radio"]:focus {
+                 border-bottom: 1.5px solid #e35205; }
+            .tabs [class^="tab"] [type="radio"]:checked,
+            .tabs [class*=" tab"] [type="radio"]:checked {
+                 border-bottom: 3px solid #e35202; }
+            .tabs [class^="tab"] [type="radio"]:checked + div,
+            .tabs [class*=" tab"] [type="radio"]:checked + div {
+                 opacity: 1; }
+            .tabs [class^="tab"] [type="radio"] + div,
+            .tabs [class*=" tab"] [type="radio"] + div {
+                display: block;
+                opacity: 0;
+                padding: 2rem 0;
+                width: 90%;
+                -webkit-transition: all 0.3s ease-in-out;
+                -moz-transition: all 0.3s ease-in-out;
+                -o-transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out; }
+            .tabs .tab-2 {
+                width: 50%; }
+            .tabs .tab-2 [type="radio"] + div {
+                width: 200%;
+                margin-left: 200%; }
+            .tabs .tab-2 [type="radio"]:checked + div {
+                margin-left: 0; }
+            .tabs .tab-2:last-child [type="radio"] + div {
+                margin-left: 100%; }
+            .tabs .tab-2:last-child [type="radio"]:checked + div {
+                margin-left: -100%; }
+        </style>
+
+    </head>
+
+    <body>
+        <main>
+    
+            <div class="h1-style w3-animate-left"> 
+                <h1 style="font-size:30px;">Frequently Asked Questions</h1>
+            </div>
+
+
+            <div class="tabs">
+                <!--first-tab-->
+                <div class="tab-2">
+                  <label for="tab2-1" style="color:rgb(88, 87, 87);"> Monthly ViSight PDF Report</label>
+                  <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
+                  <div>
+                    <h4 style="padding-left:160px; color:#e35202; font-weight:700; padding-bottom:20px;">Monthly ViSight PDF Report Questions</h4>
+                      <section class="faq-container">
+                        <div class="faq-one">
+        
+                            <!-- faq question and answer -->
+                            <h1 class="faq-page">1. I have received notification email/sms about TM ViSight Portal for 
+                                Tollfree ViSight Report. Would you tell me more about it?</h1>
+                            <div class="faq-body">
+                                <p>During pre-launching of the TM ViSight Portal, notification email and sms served as a 
+                                    reminder to inform you that Monthly ViSight report in PDF will no longer be sent to 
+                                    your email in box and you are advised to log on to TM ViSight Portal to retrieve 
+                                    your monthly ViSight report at https://tm.visight.com.my.
+                                </p>
+                            </div>
+                        </div>
+                        <hr class="hr-line">
+        
+                        <div class="faq-two">
+                            <!-- faq question and answer -->
+                            <h1 class="faq-page">2. Would you please guide me for TM ViSight Portal registration?</h1>
+                            <div class="faq-body">
+                                <p>Please call us at no charge on 1800 888 CTS (287) and our customer service team 
+                                   will assist you.
+                                </p>
+                            </div>
+                        </div>
+                        <hr class="hr-line">
+        
+        
+                        <div class="faq-three">
+        
+                            <!-- faq question and answer -->
+                            <h1 class="faq-page">3. Would you help me to register to TM ViSight Portal on my behalf?</h1>
+                            <div class="faq-body">
+                                <p>No. For security reasons we are unable to register your account on your behalf. 
+                                    However, we can assist to guide you for registration. Please contact us free of 
+                                    charge on 1800 888 CTS (287) for assistance.
+                                </p>
+                            </div>
+                        </div>
+                        <hr class="hr-line">
+        
+                        <div class="faq-four">
+                            <!-- faq question and answer -->
+                            <h1 class="faq-page">4. May I know why we need to use TM ViSight Portal and not you are no longer 
+                                sending via email?</h1>
+                            <div class="faq-body">
+                                <p>As part of our commitment to improve and enhance our service delivery the portal enables 
+                                    you to access your information from anywhere, anytime with internet access.
+                                    The flexibility in TM ViSight Portal allows us to deliver daily information for premier 
+                                    customer 
+                                </p>
+                            </div>
+                        </div>
+                        <hr class="hr-line">
+        
+        
+                        <div class="faq-five">
+                            <!-- faq question and answer -->
+                            <h1 class="faq-page">5. Can I choose to receive monthly ViSight Report via email instead of online?</h1>
+                            <div class="faq-body">
+                                <p>No. All monthly ViSight Reports are retrievable through TM ViSight Portal only.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                  </div>
+                </div>
+
+                <!-- second tab -->
+                <div class="tab-2">
+                  <label for="tab2-2" style="color:rgb(87,87,87);">Premier Access</label>
+                  <input id="tab2-2" name="tabs-two" type="radio">
+                  <div>
+                    <h4 style="color:#e35202; font-weight:700;">Premier Access</h4>
+
+
+                </div>
+              </div>
+              <br/><br/><br/>
+        </main>
+
+        <!-- JavaScript lines -->
+        <script>
+            var faq = document.getElementsByClassName("faq-page");
+            var i;
+
+            for (i = 0; i < faq.length; i++) {
+                faq[i].addEventListener("click", function () {
+                    /* Toggle between adding and removing the "active" class,
+                    to highlight the button that controls the panel */
+                    this.classList.toggle("active");
+
+                    /* Toggle between hiding and showing the active panel */
+                    var body = this.nextElementSibling;
+                    if (body.style.display === "block") {
+                        body.style.display = "none";
+                    } else {
+                        body.style.display = "block";
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

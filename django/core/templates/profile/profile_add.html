@@ -1,0 +1,170 @@
+{% extends "layouts/basee.html" %}
+
+{% block title %} Sign Up {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<script type="text/javascript">
+    function myFunction(){
+        if ($('#id_is_superuser').prop('checked')) {
+            document.getElementById('id_compName').value = "1"
+            //document.getElementById('id_compName').id = "TM One [TMOne]"
+        }
+    }
+    function validate_form(){
+        var strComp =  document.getElementById('id_compName').value
+        if (strComp == 0){
+            alert("Please select Company Name");
+            return false;
+        }
+    }
+</script>
+
+    <main>
+        <section class="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
+            <div class="container">
+                <!-- <div class="row justify-content-center form-bg-image" data-background-lg="/static/assets/img/illustrations/signin.svg"> -->
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <div class="mb-4 mb-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                            <div class="text-center text-md-center mb-4 mt-md-0">
+                                <br />
+                                <p>
+                                    {% if msg %}
+                                        {{ msg | safe }}
+                                    {% else %}
+                                        Add your credentials
+                                    {% endif %}                                     
+                                </p> 
+                            </div>
+
+                            <form method="post" action="" onsubmit=" return validate_form()">
+                            
+                                {% csrf_token %}
+
+                                <!-- Form -->
+                                <div class="form-group mb-4">
+                                    <label for="email">Username</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon3"><i class="mdi mdi-contacts menu-icon"></i></span>
+                                        {{ form.username }}
+                                    </div>  
+                                    <span class="text-error">{{ form.username.errors }}</span>
+                                </div>
+
+                                <!-- Form -->
+                                <div class="form-group mb-4">
+                                    <label for="email">First Name</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon3"><i class="mdi mdi-file-document-box menu-icon"></i></span>
+                                        {{ form.first_name }}
+                                    </div>  
+                                    <span class="text-error">{{ form.first_name.errors }}</span>
+                                </div>
+                                <!-- End of Form -->
+
+                                <!-- Form -->
+                                <div class="form-group mb-4">
+                                    <label for="email">Last Name</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon3"><i class="mdi mdi-file-document-box menu-icon"></i></span>
+                                        {{ form.last_name }}
+                                    </div>  
+                                    <span class="text-error">{{ form.last_name.errors }}</span>
+                                </div>
+                                <!-- End of Form -->
+
+                                <!-- Form -->
+                                <div class="form-group mb-4">
+                                    <label for="email">Email</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon3"><i class="mdi mdi-file-document-box menu-icon"></i></span>
+                                        {{ form.email }}
+                                    </div>  
+                                    <span class="text-error">{{ form.email.errors }}</span>
+                                </div>
+                                <!-- End of Form -->
+
+                                <!-- End of Form -->
+                                <div class="form-group">
+
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="password">Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon4"><i class="mdi mdi-cached menu-icon"></i></span>
+                                            {{ form.password1 }}
+                                        </div>  
+                                        <span class="text-error">{{ form.password1.errors }}</span>
+                                    </div>
+                                    <!-- End of Form -->
+
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="password">Confirm Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon4"><i class="mdi mdi-cached menu-icon"></i></span>
+                                            {{ form.password2 }}
+                                        </div>  
+                                        <span class="text-error">{{ form.password2.errors }}</span>
+                                    </div>
+                                    <!-- End of Form -->                                    
+                                </div>
+
+                                <!-- Form -->
+                                <div class="form-group mb-4">
+                                    <label for="superuser">Is Superuser</label>
+                                    <!-- <input id="is_superuser" type="checkbox" name="is_superuser" value='{{ form.is_superuser }}'> -->
+                                    {{ form.is_superuser }}
+                                    <span class="text-error">{{ form.is_superuser.errors }}</span>
+                                </div>
+                                <!-- End of Form -->                                    
+
+                                <!-- Form -->
+                                <div class="form-group mb-4" style="display: none;">
+                                    <label for="satff">Is Staff</label>{{ form.is_staff }}
+                                    <span class="text-error">{{ form.is_staff.errors }}</span>
+                                </div>
+                                <!-- End of Form -->                                    
+
+                                <!-- Form -->
+                                <div class="form-group mb-4">
+                                    <label for="email">Company Name</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon3"><i class="mdi mdi-file-document-box menu-icon"></i></span>
+                                        {{ form_details.compName }}
+                                    </div>  
+                                    <span class="text-error">{{ form_details.compName.errors }}</span>
+                                </div>
+                                <!-- End of Form -->
+
+                                <div class="d-flex justify-content-between align-items-top mb-4">
+                                        <!-- <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="remember">
+                                            <label class="form-check-label mb-0" for="remember">
+                                              Agree Terms
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <a href="{% url 'login' %}" class="small text-right">Login</a>
+                                        </div> -->
+                                    </div>                                  
+                                <div class="d-grid">
+                                    <button type="submit" name="register" class="btn btn-dark btn-lg" style="background-color:#ee7202; border: #ee7202;">Save</button>
+                                    <a href="{% url 'list_profile' %}" class="btn btn-dark btn-lg" style="background-color:#ee7202; border: #ee7202;" role="button" > Back To List</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+{% endblock javascripts %}

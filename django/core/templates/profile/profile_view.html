@@ -1,0 +1,199 @@
+{% extends "layouts/basee.html" %}
+
+{% block title %} View Profile {% endblock %} 
+
+{% block content %}
+
+<style>
+    .user-image {
+        border-radius: 50%;
+        width: 170px;
+        margin: 30px 50px 10px 450px;
+    }
+
+    .info-wrapper {
+        width: 100%;
+        overflow: hidden;
+        margin-left:90px;
+        /*border: 3px solid black;*/
+    }
+    .col1 {
+        float:left; 
+        width: 33%; 
+        height:80px;
+        padding-left:5px; 
+        /*background-color: yellow;*/
+    }
+    .col2 {
+        float:left; 
+        width: 33%; 
+        height:80px; 
+        padding-left:5px; 
+        /*background-color:rgb(147, 147, 209);*/
+    }
+    .col3 {
+        float:left; 
+        width: 34%; 
+        height:80px; 
+        padding-left:5px; 
+        /*background-color:orange;*/
+    }
+
+    /* User Information */
+    .user-email {
+        margin-left: 430px;
+        color: rgb(139, 139, 139);
+        font-size: 16px;
+    }
+    .user-details {
+        color: #0072ce;
+        font-weight: 700;
+    }
+    .user-subdetails {
+        font-weight:500;
+    }
+</style>
+
+<!-- <div class="col-12 col-xl-12 mb-2">
+    <div class="col-12 px-0 mb-2">
+        <div class="card border-light shadow-sm">
+            <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+                <div class="d-block mb-3 mb-sm-0">
+                    <div class="h2 fw-normal text-black mb-2">Profile</div>
+                    <br/>
+                    <h2 class="h5 mb-4">General information (profile_view.html)</h2>
+                    <div class = "form-group">
+                            <form method="POST">
+                            {% csrf_token %}
+                            {{form.as_p}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ -->
+
+<!-- <h1>{{user.pk}}</h1> -->
+<main>
+    <section class="d-flex align-items-center my-5 mt-lg-6 mb-lg-5" style="margin-top:0px;padding-top:0px;">
+        <div class="container" style="margin-top:0px;padding-top:0px;">
+            <!-- <div class="row justify-content-center form-bg-image" data-background-lg="/static/assets/img/illustrations/signin.svg"> -->
+                <div class="col-12 d-flex align-items-center justify-content-center" style="margin-top:0px;padding-top:0px;">
+                    <div class="mb-4 mb-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500" style="margin-top:0px;padding-top:0px;">
+
+                        <form method="post" action="">
+                        
+                            {% csrf_token %}
+                            
+                            <!-- User image -->
+                            <img src="/static/assets/img/userprofile/user_pic_example.png" alt="User Avatar" class="user-image">
+                            <div class="user-email">
+                                <label for="email">{{ user.email }}</label>
+                            </div>
+
+                            <br/>
+                            <br/>
+
+                            <!-- User information -->
+                            <div class="info-wrapper">
+                                <div class="col1">
+                                    <label for="email">
+                                        <span class="user-details"> USERNAME </span><br/> 
+                                                                {{ user.username }} 
+                                    </label>
+                                </div>
+                                <div class="col2">
+                                    <label for="first_name">
+                                        <span class="user-details"> FIRST NAME </span><br/> 
+                                                                {{ user.first_name }} 
+                                    </label>
+                                </div>
+                                <div class="col3">
+                                    <label for="last_name">
+                                        <span class="user-details"> LAST NAME </span><br/> 
+                                                                {{ user.last_name }}  
+                                    </label>
+                                </div>
+                            </div>
+
+                            <br/>
+
+                            <div class="info-wrapper">
+                                <div class="col1">
+                                    <label for="superuser">
+                                        <span class="user-details"> ROLE </span><br/> 
+                                                                {% if user.is_superuser == True %}
+                                                                Superuser
+                                                                {% else %}
+                                                                Not Superuser
+                                                                {% endif %}
+                                                                /
+                                                                {% if user.is_staff == True %}
+                                                                Admin
+                                                                {% else %}
+                                                                Staff
+                                                                {% endif %}
+
+                                    </label>
+                                </div>
+                                <div class="col2">
+                                    <label for="satff">
+                                        <span class="user-details"> COMPANY </span><br/> 
+                                                                {{ user.userprofile.compName }} 
+                                    </label>
+                                </div>
+                                <div class="col3">
+                                    <a href="{% url 'password_change' %}"> Change password? </a>
+                                </div>
+
+                            
+                                
+                            </div>
+
+                            <!--<div class="form-group mb-4">
+                                <label for="email">Username : {{ user.username }}</label>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label for="email">First Name : {{ user.first_name }}</label>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label for="email">Last Name : {{ user.last_name }}</label>
+                            </div>
+                         
+                            <div class="form-group mb-4">
+                                <label for="email">Email : {{ user.email }}</label>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label for="superuser">Is Superuser : {{ user.is_superuser }}</label>
+                            </div>                                  
+
+                            <div class="form-group mb-4"">
+                                <label for="satff">Is Staff : {{ user.is_staff }}</label>
+                            </div>                                  
+
+                            <div class="form-group mb-4"">
+                                <label for="satff">Company Name : {{user.userprofile.compName}}</label>
+                            </div>-->                               
+
+                            <!-- NOT SURE WHAT IS THIS FOR -->
+                            <!--<div class="d-grid">
+                                <button type="submit" name="register" class="btn btn-dark btn-lg" style="background-color:#ee7202; border: #ee7202;">Create User</button>
+                                {% if request.user.is_superuser %}
+                                <a href="{% url 'list_profile' %}" class="btn btn-dark btn-lg" style="background-color:#ee7202; border: #ee7202;" role="button" > Back To List</a>
+                                {% endif %}
+                            </div>-->
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

@@ -1,0 +1,323 @@
+{% extends "layouts/basee.html" %}
+
+{% block title %} InSight - Home {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<style>
+    /*.h1-style {
+        color: orange; 
+        padding-top:50px;
+        font-weight: 700;
+    }*/
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+<head>
+    <!-- stylesheet for the w3 class -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">     
+    <style>
+        .homepg-wrapper {
+            width: 100%;
+            overflow: hidden; /* add this to contain floated children */
+
+        }
+        .pagetitle-style {
+            /*color: #ff6600;*/
+            color: #f58200;
+            /*color: black;*/
+            padding-top:50px;
+            font-weight: 700;
+            padding-left: 100px;
+            width:800px;
+            font-size:320%;
+        }
+
+        .accordion-content {
+            padding-top: 65px;
+            width:55%;
+            float:left;
+        }
+        .homepg-img {
+            float:left;
+            width:45%;
+            padding-left:20px;
+        }
+        
+        /* FOR ACCORDIAN MENU STYLE */
+        /* SOURCE: https://codepen.io/robstinson/pen/LYZProy */
+
+        input {
+            display: none;
+        }
+
+        label {
+            display: flex;
+            /*width: 100%;*/
+            height: 50px;
+            cursor: pointer;
+            border-bottom: 2px solid #909091;
+            user-select: none;
+            font-size: 110%;
+            /*width: 850px;*/
+            margin-left:100px;
+        }
+
+        label div:first-child {
+            width: 100%;
+            line-height: 45px;
+            margin-left: 10px;
+            font-size: 1.1em;
+        }
+
+        .tab-title {
+            background-color: rgba(119, 119, 117, 0.8);
+            color:white;
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+            font-weight: 600;
+        }
+
+        /*for the '+' symbol*/
+        .cross{
+            margin-right:15px;
+            margin-top:3px;
+            font-size:80%;
+            color: white;
+        }
+
+        .cross:before,.cross:after {
+            content: '';
+            border-top: 2px solid #3E474F;
+            width: 15px;
+            display: block;
+            margin-top: 18px;
+            transition: 0.3s;
+            color:white;
+        }
+
+        .cross:after {
+            transform: rotate(90deg);
+            margin-top: -2px;
+            color:white;
+        }
+
+        .content {
+            box-sizing: border-box;
+            font-size: 0.9em;
+            margin: 10px 10px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height, .5s;
+            margin-left:100px;
+            text-align: justify;
+        }
+        .content-wrapper {
+            padding-bottom:30px;
+            /*width:84%;*/
+            width:150%;
+        }
+
+
+        input:checked ~ .content {
+            max-height: 400px;
+            transition: max-height, 1s;
+        }
+
+        input:checked ~ label .cross:before {
+            transform: rotate(180deg);
+        }
+
+        input:checked ~ label .cross:after {
+            transform: rotate(0deg);
+        }
+
+        /*----------tool-tip------------*/
+        .tip {
+            color: #f03768;
+            cursor: help;
+            position: relative;
+            overflow: visible;
+            font-family: monospace;
+            font-size: 1.3em;
+        }
+
+        .tip:before,
+        .tip:after {
+            position: absolute;
+            opacity: 0;
+            z-index: -100;    
+            transform: translateY(-30%);
+            transition: .4s;
+        }
+
+        .tip:before {
+            content: '';
+            border-style: solid;
+            border-width: 0.8em 0.5em 0 0.5em;
+            border-color: #3E474F transparent transparent transparent;
+            transform: translateY(-200%);
+            bottom:90%;
+            left:50%;
+        }
+
+        .tip:after {
+            content: attr(data-tip);
+            background: #3E474F;
+            color: white;
+            width: 150px;
+            padding: 10px;
+            font-size: 0.8em;
+            bottom: 150%;
+            left: -50%;
+        }
+
+        .tip:hover:before,
+        .tip:hover:after {
+            opacity: 1;
+            z-index: 100;
+            transform: scaleY(1);
+        }
+
+        /* TRYYYY */
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            grid-gap: 2px;
+            background-color:#fff;
+            border: 0px;
+            padding: 5px;
+            margin-top:30px;
+        }
+
+        .grid-container > div {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 9px 0;
+        }
+
+        .item1 {
+            grid-area: 1 / 3 / span 2 / span 3;
+            margin-right:20px;
+        }
+        .item2 {
+            grid-area: 1 / 1 / span 1 / span 1;
+        }
+        .item3 {
+            grid-area: 2 / 1 / span 1 / span 1;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+    <div class="row justify-content-md-right fmxh-1200">
+        <div class="col-12 col-xl-12 mb-2">
+            <div class="card bg-primary-alt"  style="border-bottom: 0px;">
+                <!-- ORIGINALLY HERE AS WELL-->
+                <!--<h1 class="pagetitle-style"> Grow Your Business with TM ViSight Reports </h1>--> 
+                
+                
+                <div class="grid-container">
+                    <div class="item1">
+                        <div class="w3-animate-bottom" style="margin-top:50px;">
+                            <img src="/static/assets/img/homepage/homepage.PNG" width="105%" alt="TM ONE Logo">
+                        </div>
+                    </div>
+                    <div class="item2">
+                        <h1 class="pagetitle-style w3-animate-top" style="padding-right: 0px;"> Grow Your Business with TM InSight Reports </h1>
+                    </div>
+                    <div class="item3">
+                        <div class="accordion-content">
+                            <div class="content-wrapper">
+                            <input type="radio" id="tab-1" name="tabs">
+                            <label for="tab-1" class="tab-title"><div> Challenges </div><div class="cross"></div></label>
+                            <div class="content"> Business is about making the right decision at the right time. Research shows
+                                thet business analytic tools are the key to driving a competitive edge
+                                and improving business operations. </div>
+                            </div>
+                        
+                            <div class="content-wrapper">
+                            <input type="radio" id="tab-2" name="tabs">
+                            <label for="tab-2" class="tab-title"><div> Solution </div><div class="cross"></div></label>
+                            <div class="content"> TM InSight Reports have been successfully utilised for many years by
+                                companies in Malaysia. As information is becoming crucial to 
+                                businesses, InSight is highly requested to be made frequently available.
+                                Answering the demand, TM InSight is now available from anywhere and anytime.</div>
+                            </div>
+                        </div>
+                    </div>  
+                  </div>
+
+                <!--<div class="homepg-wrapper">
+                    <div class="accordion-content">
+                        <h2 class="titledesc-style"> Challenges</h2>
+                        <p class="pagedesc-style">
+                            Business is about making the right decision at the right time. Research shows
+                            thet business analytic tools are the key to driving a competitive edge
+                            and improving business operations.
+                        </p>
+
+                        <h2 class="titledesc-style" > Solution </h2>
+                            <p class="pagedesc-style">
+                                TM InSight Reports have been successfully utilised for many years by
+                                companies in Malaysia. As information is becoming crucial to 
+                                businesses, InSight is highly requested to be made frequently available.
+                                Answering the demand, TM InSight is now available from anywhere and anytime.
+                            </p>
+
+                        <h2  class="titledesc-style"> Partnership </h2>
+                        <p class="pagedesc-style">
+                            Partnering with Cyngus...
+                        </p>
+                    </div>
+                    <div class="homepg-img">
+                        <img src="/static/assets/img/homepage/homepage.PNG" width="90%" alt="TM ONE Logo">
+                    </div>
+                </div>-->
+
+                     <!-- FOR ACCORDION MENU STYLE ((ORIGINALLY HEREEE))-->
+                    <!--<div class="homepg-wrapper">
+                        <div class="accordion-content">
+                            <div class="content-wrapper">
+                            <input type="radio" id="tab-1" name="tabs">
+                            <label for="tab-1" class="tab-title"><div> Challenges </div><div class="cross"></div></label>
+                            <div class="content"> Business is about making the right decision at the right time. Research shows
+                                thet business analytic tools are the key to driving a competitive edge
+                                and improving business operations. </div>
+                            </div>
+                        
+                            <div class="content-wrapper">
+                            <input type="radio" id="tab-2" name="tabs">
+                            <label for="tab-2" class="tab-title"><div> Solution </div><div class="cross"></div></label>
+                            <div class="content"> TM InSight Reports have been successfully utilised for many years by
+                                companies in Malaysia. As information is becoming crucial to 
+                                businesses, InSight is highly requested to be made frequently available.
+                                Answering the demand, TM InSight is now available from anywhere and anytime.</div>
+                            </div>
+                        </div>
+                        <div class="homepg-img">
+                            <img src="/static/assets/img/homepage/homepage.PNG" width="90%" alt="TM ONE Logo">
+                        </div>
+                    </div>-->
+            </div>
+        </div>
+    </div>
+
+    <!--<div style="margin-top:30px; padding-bottom:30px;"></div>-->
+
+
+
+</body>
+
+<footer style="background-color:#33384b; height:30px; position:fixed; width:100%; bottom:0;">
+    <p class="footerText" style="margin-top:6px; font-size:10px; text-align:right; padding-right:20px; color:white;">© 2021 Copyright Telekom Malaysia</p>
+</footer>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

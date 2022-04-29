@@ -1,0 +1,95 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <!--div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+        <div class="btn-toolbar dropdown">
+            <button class="btn btn-dark btn-sm me-2 dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="fas fa-plus me-2"></span>New Task
+            </button>
+            <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-0">
+                <a class="dropdown-item fw-normal rounded-top" href="#"><span class="fas fa-tasks"></span>New Task</a>
+                <a class="dropdown-item fw-normal" href="#"><span class="fas fa-cloud-upload-alt"></span>Upload Files</a>
+                <a class="dropdown-item fw-normal" href="#"><span class="fas fa-user-shield"></span>Preview Security</a>
+                <div role="separator" class="dropdown-divider my-0"></div>
+                <a class="dropdown-item fw-normal rounded-bottom" href="#"><span class="fas fa-rocket text-danger"></span>Upgrade to Pro</a>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-primary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-primary">Export</button>
+        </div>
+    </div-->
+    <!-- <div class="h5 fw-normal mb-2">HOME</div>
+    <div class="h5 fw-normal mb-3">Call Overview</div>
+    -->
+    
+        <div class="h5 fw-normal mb-2">Home</div>
+        <!--<div class="row justify-content-md-center">
+            <div class="col-12  mb-3">-->
+            <div class="row justify-content-md-right">
+            <div class="col-12 col-xl-12 mb-2">    
+                <div class="card bg-primary-alt shadow-sm">
+                    <div class="card-header d-sm-flex flex-row align-items-center flex-0">
+                        <div class="d-block mb-3 mb-sm-0">
+                            <div class="h5 fw-normal mb-2">Call Overview</div>
+                        </div>
+                    </div>
+                <!-- tableau sample data (Method 3 - API) -->
+                <body onload="initViz();">
+                    <div class="card-body p-2" id="vizContainer">
+                        <script type="text/javascript"
+                        src="https://online.tableau.com/javascripts/api/tableau-2.8.0.min.js"></script>
+                        <script type="text/javascript">
+                            function initViz() {
+                                var containerDiv = document.getElementById("vizContainer"),
+                                    url = "https://prod-apnortheast-a.online.tableau.com/t/lazul/views/CallSample_16245257529420/CallaerSample/izyanaqilah12@gmail.com/63f193e5-0692-472c-9da5-280cc2aa6bbd?:display_count=n&:showVizHome=n&:origin=viz_share_link",
+                                    options = {
+                                        hideTabs: true,
+                                        onFirstInteractive: function () {
+                                            console.log("Run this code when the viz has finished loading.");
+                                        }
+                                    };
+                
+                                var viz = new tableau.Viz(containerDiv, url, options);
+                            // Create a viz object and embed it in the container div.
+                            }
+                        </script>
+                    </div>
+                </body>
+                </div>
+            </div>
+        </div>
+    
+                        
+    <div class="row justify-content-md-center">
+        <div class="col-12 mb-3">
+            <div class="card bg-secondary-alt shadow-sm">
+                <div class="card-header d-sm-flex flex-row align-items-center flex-0">
+                    <div class="d-block mb-3 mb-sm-0">
+                        <h4>Welcome to TM ViSight Portal</h4>            
+                            <p style="font-size:90%;">Business is about making the right decision at the right time. Research shows that business analytic tools are the key to drive competitive edge and improve business operations.</p>
+                            <p style="font-size:90%;">TM ViSight Reports have been successfully utilised for many years by companies in Malaysia. As the information has proven to be invaluable to your business, many customers have requested ViSight be made available on a more frequent basis. To meet this demand TM ViSight is now available providing you online access from anywhere, anytime with internet access.</p>
+                            <p style="font-size:90%;">TM are always researching for innovative applications that will improve our service delivery and bring value to you to enhance your business. We entered a strategic partnership with Cyngus Technologies Sdn Bhd to provide analytical solutions to our customers. We have worked with Cyngus for 6 years and many of our customers are enjoying the value this information brings to their business on a daily basis.</p>
+                            <p style="font-size:90%;">For further information and clarification on how this information will benefit your organisation please call our Specialists on 1800 888 CTS (287).</p>
+                            </body>
+                            <h5>Premier TM ViSight Reporting</h5>
+                            <p style="font-size:90%;">Data will be updated on a daily basis to provide you with the latest information available enabling you to expedite your decision making. This information is available to you anywhere, anytime with internet access. This section of information is structured for Marketing, Customer Services and Operations to fit into your business needs and to easily obtain the information you require.</p>
+                            <p style="font-size:90%;">Subscription is necessary to access this information. Click&nbsp;<a href="https://visight.tmone.com.my/upgrade-now.cfm">here to upgrade.</a></p>
+                            <h5>Monthly reporting - ViSight VAS and OMS</h5>
+                            <p style="font-size:90%;">With the TM ViSight portal, you no longer have to wait for your monthly report to be pushed into your email inbox. The information you require will be a few clicks away accessible online anywhere, anytime with internet access. As normal your portfolio of TM ViSight reports will be updated on a monthly basis on "My Portal".</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

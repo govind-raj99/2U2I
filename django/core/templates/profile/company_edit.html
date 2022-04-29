@@ -1,0 +1,58 @@
+{% extends "layouts/basee.html" %}
+
+{% block title %} Edit Company Detail {% endblock %} 
+
+{% block content %}
+
+
+<!-- <div class="col-12 col-xl-12 mb-2">
+    <div class="col-12 px-0 mb-2">
+        <div class="card border-light shadow-sm">
+            <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+                <div class="d-block mb-3 mb-sm-0">
+                    <div class="h2 fw-normal text-black mb-2" >Company</div>
+                    <br/>
+                    <h2 class="h5 mb-4">Edit Company Details</h2>
+                    <div class = "form-group">
+                            <form method="POST">
+                            {% csrf_token %}
+                            {{form.as_p}}
+                            <button class="btn btn-primary btn-lg" style="background-color:#ee7202; border: #ee7202;">Update</button>
+                            <a href="{% url 'list_company' %}" class="btn btn-dark btn-lg" style="background-color:#ee7202; border: #ee7202;" role="button" > Back To List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<main>
+    <section class="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
+        <div class="container">
+            <!-- <div class="row justify-content-center form-bg-image" data-background-lg="/static/assets/img/illustrations/signin.svg"> -->
+                <div class="col-12 d-flex align-items-center justify-content-center">
+                    <div class="mb-4 mb-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                        <div class="text-center text-md-center mb-4 mt-md-0">
+                            
+                            <h2 class="">Edit Company Details</h2>
+                        </div>
+
+                        <form method="post" action="">
+                        
+                            {% csrf_token %}
+                            {{form.as_p}}
+
+                            <div class="d-grid">
+                                <button type="submit" name="register" class="btn btn-dark btn-lg" style="background-color:#ee7202; border: #ee7202;">Update</button>
+                                <a href="{% url 'list_company' %}" class="btn btn-dark btn-lg" style="background-color:#ee7202; border: #ee7202;" role="button" > Back To List</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+{% endblock %}

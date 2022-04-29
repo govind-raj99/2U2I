@@ -1,0 +1,194 @@
+{% extends "layouts/basee.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+
+{% endblock stylesheets %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AdHoc Page Download </title>
+        <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+        <!-- stylesheet for the w3 class -->
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+        <style>
+            .h1-style {
+                border-bottom: 3px solid rgba(170, 172, 173, 0.8);
+                margin-bottom:80px;
+                margin-top:70px;
+                width:90%;
+                margin-left:auto;
+                margin-right:auto;
+                font-weight: 500;
+            }
+
+            .form-label {
+                padding-right: 15px;
+                font-size: 14px;
+            }
+            
+            .download-bttn{border-radius: 0px; background-color: rgba(0,114,206, 0.8); color: white; border: 0px; }
+
+            /* styling for <SELECT> form data input */
+            select {
+                /* styling */
+                background-color: white;
+                border: thin solid rgb(226, 226, 226);
+                display: inline-block;
+                /font: inherit;/
+                font-size: 12px;
+                line-height: 1.5em;
+                padding: 0.5em 3.5em 0.5em 1em;
+                /* reset */
+                margin: 0;      
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+                -webkit-appearance: none;
+                -moz-appearance: none; }
+
+            input {
+                /* styling */
+                background-color: white;
+                border: thin solid rgb(226, 226, 226);
+                display: inline-block;
+                /font: inherit;/
+                font-size: 12px;
+                line-height: 1.5em;
+                padding: 0.5em 0.2em 0.5em 0.2em;
+                /* reset */
+                margin: 0;      
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+                -webkit-appearance: none;
+                -moz-appearance: none; }
+
+
+            /* arrows */
+            select.classic {
+                background-image:
+                    /linear-gradient(45deg, transparent 50%, #0072ce 50%),/ /left side of the arrow/
+                    /linear-gradient(135deg, #0072ce 50%, transparent 50%),/ /right side of the arrow/
+                    linear-gradient(45deg, transparent 50%,  transparent 50%),
+                    linear-gradient(135deg, transparent 50%, transparent 50%),
+                    linear-gradient(to right, rgb(219, 218, 218), rgb(218, 218, 218)); /background colour/
+                background-position:
+                    calc(100% - 20px) calc(1em + 2px),
+                    calc(100% - 15px) calc(1em + 2px),
+                    100% 0;
+                background-size:
+                    5px 5px,
+                    5px 5px,
+                    2.5em 2.5em; /* filled the whole input if disabled */
+                background-repeat: no-repeat; }
+
+            input.classic {
+                background-image:
+                    linear-gradient(45deg, transparent 50%,  transparent 50%),
+                    linear-gradient(135deg, transparent 50%, transparent 50%),
+                    linear-gradient(to right,  rgb(219, 218, 218), rgb(218, 218, 218));
+                background-position:
+                    calc(100% - 20px) calc(1em + 2px),
+                    calc(100% - 15px) calc(1em + 2px),
+                    100% 0;
+                background-size:
+                    5px 5px,
+                    5px 5px,
+                    2.5em 2.5em;
+                background-repeat: no-repeat;}
+
+            select.classic:focus {
+                background-image:
+                    /*linear-gradient(45deg, white 50%, transparent 50%),
+                    linear-gradient(135deg, transparent 50%, white 50%),*/
+                    linear-gradient(45deg, transparent 50%,  transparent 50%),
+                    linear-gradient(135deg, transparent 50%, transparent 50%),
+                    /linear-gradient(to right, gray, gray);/
+                    linear-gradient(to right, rgb(219, 218, 218), rgb(218, 218, 218));
+                background-position:
+                    calc(100% - 15px) 1em,
+                    calc(100% - 20px) 1em,
+                    100% 0;
+               /* background-size:
+                    5px 5px,
+                    5px 5px,
+                    2.5em 2.5em;*/
+                background-repeat: no-repeat;
+                outline: 0; }
+
+            select:-moz-focusring {
+                color: transparent;
+                text-shadow: 0 0 0 #000; }
+        </style>
+    </head>
+
+    <body>
+        <main>
+    
+            <div class="h1-style w3-animate-left"> 
+                <h1 style="font-size:30px;">Daily Report </h1>
+            </div>
+
+            <div style="padding-left:5em;">
+                <form action="" method="post">
+                    {% csrf_token %}
+
+                    <label for="data_table" class="form-label"> Choose a table: </label>
+                    <select class="classic" name="data_table">
+                        <option value="no-table" selected> </option>
+                        <option value="EAS" > Exchange Area Summary</option>
+                        <option value="SRS">State Region Summary</option>
+                        <option value="OBD">Overview By Day</option>
+                        <option value="SC">Short Calls</option>
+                        <option value="TOD">Time of Day</option>
+                        <option value="MF">Most Frequent</option>
+                        <option value="LC">Longest Calls</option>
+                        <option value="AS">Answerpoint Summary</option>
+                        <option value="MC">Missed Calls</option>
+                        <option value="MONGT">Missed Opportunities - Never Got Through</option>
+                        <option value="MOGT">Missed Opportunities - Got Through</option>
+                    </select> <br/><br/>
+
+                    <label for="tollfree_num" class="form-label"> Choose your TollFree Number </label>
+                    <select id="cars" class="classic" name="tollfree_num">
+                        <option value="no-table" selected> </option>
+                        <option value="1300800027">1300800027</option>
+                        <option value="1800882223">1800882223</option>
+                        <option value="1800882838">1800882838</option>
+                    </select><br/><br/>
+
+                    <label for="fromDate" class="form-label"> From </label>
+                    <input type="date" id="fromDate" name="from_date" class="classic"><br/><br/>
+
+                    <label for="endDate" class="form-label"> To </label>
+                    <input type="date" id="endDate" name="end_date" class="classic">
+
+                    <br/><br/><br/>
+                    <a href="{% url 'downloadAdhoc' %}">
+                        <button class="btn btn-primary btn xs download-bttn"> Download </button>
+                    </a>
+
+                    <input type="submit" values="Execute the python script">
+                </form>
+
+               
+            </div>
+
+        </main>
+    </body>
+</html>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

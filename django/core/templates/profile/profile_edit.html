@@ -1,0 +1,103 @@
+{% extends "layouts/basee.html" %}
+
+{% block title %} Edit Profile {% endblock %} 
+
+{% block content %}
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        if ($('#id_is_superuser').prop('checked')) {
+            //alert('Test test');
+            document.getElementById('id_compName').value = "1"
+            //document.getElementById('id_compName').id = "TM One [TMOne]"
+        // }else{
+        //     alert('Test test uncheck');
+        }
+    });
+    function myFunction(){
+        // var query = document.getElementById("id_compName").value;
+        // var e = document.getElementById("id_compName");
+        // //alert(query);
+        // var strUser = e.options[e.selectedIndex];
+        //alert(strUser.text);
+        if ($('#id_is_superuser').prop('checked')) {
+            document.getElementById('id_compName').value = "1"
+            //document.getElementById('id_compName').id = "TM One [TMOne]"//salah tak jalan
+        // }else{
+        //     document.getElementById('id_compName').value = query
+        }
+    }
+    function validate_form(){
+        var strComp =  document.getElementById('id_compName').value
+        if (strComp == 0){
+            alert("Please select Company Name");
+            return false;
+        }
+    }
+</script>
+
+<div class="col-12 col-xl-12 mb-2">
+    <div class="col-12 px-0 mb-2">
+        <div class="card border-light shadow-sm">
+            <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+                <div class="d-block mb-3 mb-sm-0">
+                    <div class="h2 fw-normal text-black mb-2">Profile</div>
+                    <br/>
+                    <h2 class="h5 mb-4">General information</h2>
+                    <div class = "form-group">
+                            <form method="POST" onsubmit=" return validate_form()">
+                            {% csrf_token %}
+                            <table>
+                                <tr>
+                                    <td><label for="first_name">First Name :</label></td>
+                                    <td>
+                                        {{form_user.first_name}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="last_name">Last Name :</label></td>
+                                    <td>
+                                        {{form_user.last_name}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="email">Email :</label></td>
+                                    <td>
+                                        {{form_user.email}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="is_superuser">Superuser : </label></td>
+                                    <td>
+                                        {{form_user.is_superuser}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="is_active">Active : </label></td>
+                                    <td>
+                                        {{form_user.is_active}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="compName">Company Name : </label></td>
+                                    <td>
+                                        {{form_userprofile.compName}}
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                            <!-- {{form_user}}
+                            {{form_company}} -->
+                             <button class="btn btn-primary btn-lg" style="background-color:#ee7202; border: #ee7202;">Update</button>
+                            <a href="{% url 'list_profile' %}" class="btn btn-dark btn-lg" style="background-color:#ee7202; border: #ee7202;" role="button" > Back To List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

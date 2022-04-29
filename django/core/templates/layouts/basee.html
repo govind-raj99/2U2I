@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+	<!-- Required meta tags -->
+    <!-- <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ -->
+	<!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>TM Tollfree Analytics Portal</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../../static/assets2/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../../static/assets2/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../../../static/assets2/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="../../../static/assets2/vendors/select2/select2.min.css" />
+    <link rel="stylesheet" href="../../../static/assets2/vendors/select2-bootstrap-theme/select2-bootstrap.min.css" />
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="../../../static/assets2/css/demo_2/style.css" />
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="../../../static/assets2/images/favicon.png" />
+
+</head>
+
+<body>
+
+<!-- Body -->
+<style type="text/css">
+	.main{
+		min-height: 100vh;
+		height: 100%;
+	}
+  #nav {
+    margin-top:0px;
+    padding-top:0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+  }
+  #nav-a {
+    padding: 26px 50px 22px 7px;
+  }
+  li a .horizontal-menu .bottom-navbar .page-navigation > .nav-item:hover > .nav-link {
+    color:white;
+    background-color: rgba(0, 113, 206, 0.8);
+  }
+  .horizontal-menu .bottom-navbar .page-navigation > .nav-item:hover > .menu title{
+    color:white;
+    background-color: rgba(0, 113, 206, 0.3);
+  }
+  .horizontal-menu .bottom-navbar .page-navigation > .nav-item.active{
+    color:white;
+    background-color: #0072ce;
+  }
+</style>
+<!-- <div class="main"> -->
+<div>
+		<!-- partial:../../partials/_horizontal-navbar.html -->
+      <!-- START OF HORIZONTAL MENU-->
+      <!-- first dashboard -->
+     <div class="horizontal-menu">
+     <!--<nav class="navbar top-navbar col-lg-12 col-12 p-0" style="display:none;">
+        <div class="container">
+
+          <div class="navbar-menu-wrapper d-flex">
+            <a class="nav-link d-flex align-items-center" href="https://www.tmone.com.my" target="_blank">
+              <img src="/static/assets/img/brand/tmlogo.png" width="8%" alt="TM ONE Logo">
+              <span class="font-16 d-block font-weight-bold">Hyperconnected Ecosystem Made Possible</span>
+            </a>
+            <ul class="navbar-nav navbar-nav-right">
+              <li class="nav-item nav-profile dropdown">
+                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                  {% comment %} <div class="nav-profile-img">
+                    <img src="../static/assets2/images/faces/face1.jpg" alt="image" />
+                  </div> {% endcomment %}
+                  <div class="nav-profile-text col-12">
+                    {{ request.user.username }}<label class="text-black font-weight-semibold m-0 mdi mdi-chevron-down"></label>
+                    {% comment %} <span class="font-13 online-color">online <i class="mdi mdi-chevron-down"></i></span> {% endcomment %}
+                  </div>
+                </a>
+                <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                  <a class="dropdown-item" href="{% url 'view_profile' %}">
+                    <i class="mdi mdi-cached mr-2 text-success"></i> My Profile </a>
+                    <a class="dropdown-item" href="{% url 'password_change' %}">
+                      <i class="mdi mdi-cached mr-2 text-success"></i> Change Password </a>
+                    <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'logout' %}">
+                    <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
+                </div>
+              </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+              <span class="mdi mdi-menu"></span>
+            </button>
+          </div>
+        </div>
+      </nav>-->
+      <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+        <span class="mdi mdi-menu"></span>
+      </button>
+
+         <!-- second dashboard -->
+       <nav class="bottom-navbar navbar-light" id="nav" style="background-color:#fff;">
+          <!--<span style="padding-bottom:70px; padding-top:10px;">
+            <a class="nav-linkd-flex align-items-center" href="https://www.tmone.com.my" target="_blank" style="position:absolute; padding:0px 5px 50px 50px;">
+              <img src="/static/assets/img/brand/tmlogo.png" width="6%" alt="TM ONE Logo">
+            </a>
+          </span>-->
+          <a class="nav-link d-flex align-items-center" href="{% url 'homepage' %}"  target="_self" style="position:absolute; padding:42px 5px 50px 50px;">
+            <img src="/static/assets/img/brand/tmlogo.png" width="5%" alt="TM ONE Logo">
+          </a>
+          <div class="container">
+            <ul class="nav page-navigation">
+                <!--<li class="nav-item" style="border:0;">
+                  <a href="#" class="nav-link" >
+                    <i class="mdi menu-icon"></i>
+                    <span class="menu-title"></span>
+                  </a>
+                </li>-->
+                <li><span style="padding-right: 90px;"></span></li>
+                <!--<li class="nav-item" style="border:0;padding-bottom:0px;">
+                    <a class="nav-link" href="{# url 'homepage' #}" id="nav-a">
+                    <i class="mdi mdi-view-dashboard menu-icon"></i>
+                    <span class="menu-title" style="padding-bottom:0px; margin-bottom:0px;">HOMEPAGE</span>
+                    </a>
+                </li>-->
+                <li class="nav-item" style="border:0;">
+                    <a class="nav-link" href="{% url 'dashboard' %}" id="nav-a">
+                    <i class="mdi mdi-view-dashboard menu-icon"></i>
+                    <span class="menu-title">DASHBOARD</span>
+                    </a>
+                </li>
+                <li class="nav-item" style="border:0;">
+                    <a class="nav-link" href="{% url 'monthlyReport' %}" id="nav-a">
+                    <i class="mdi mdi-chart-bar menu-icon"></i>
+                    <span class="menu-title">MONTHLY REPORT</span>
+                    </a>
+                </li>
+                <li class="nav-item" style="border:0;">
+                    <a class="nav-link" href="{% url 'faq' %}" id="nav-a">
+                    <i class="mdi mdi-comment-question-outline menu-icon"></i>
+                    <span class="menu-title">FAQs</span>
+                    </a>
+                </li>             
+                <li class="nav-item" style="border:0;">
+                    {% if request.user.is_superuser %}
+                    <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown" style="padding: 20px 22px 22px 7px;">
+                        <i class="mdi mdi-settings menu-icon"></i>
+                        <span class="menu-title">SETTING</span>
+                    </a>
+                        <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item" href="{% url 'list_profile' %}" style="padding-bottom:10px; padding-top:10px;"> USERS LIST </a>
+                            <a class="dropdown-item" href="{% url 'list_company' %}" style="padding-bottom:10px; padding-top:10px;"> COMPANY LIST </a>
+                        </div>
+                    {% endif %}
+                </li>
+
+            </ul>
+          </div>
+
+
+          <ul class="nav">
+            <li class="nav-item nav-profile" style="border:0;">
+              <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <div class="nav-profile-text col-12">
+                  <i class="mdi mdi-account menu-icon"></i>
+                  {{ request.user.username }}
+                </div>
+              </a>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item" href="{% url 'view_profile' %}">
+                  <i class="mdi mdi-cached mr-2 text-success"></i> My Profile </a>
+                  <!--<a class="dropdown-item" href="{% url 'password_change' %}">
+                    <i class="mdi mdi-cached mr-2 text-success"></i> Change Password </a>-->
+                  <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'logout' %}">
+                  <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <!-- END OF HORIZONTAL MENU -->
+      <div>
+        {% block content %}
+
+        {% endblock content %} 
+        
+        {% include 'footer.html' %}
+     </div>
+     
+</div>
+<!-- End Body -->
+
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="../../../static/assets2/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="../../../static/assets2/vendors/select2/select2.min.js"></script>
+    <script src="../../../static/assets2/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../../../static/assets2/js/off-canvas.js"></script>
+    <script src="../../../static/assets2/js/hoverable-collapse.js"></script>
+    <script src="../../../static/assets2/js/misc.js"></script>
+    <script src="../../../static/assets2/js/settings.js"></script>
+    <script src="../../../static/assets2/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="../../../static/assets2/js/file-upload.js"></script>
+    <script src="../../../static/assets2/js/typeahead.js"></script>
+    <script src="../../../static/assets2/js/select2.js"></script>
+    <!-- End custom js for this page -->
+
+</body>
+
+
+</html>

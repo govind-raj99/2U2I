@@ -1,0 +1,55 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Download {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<li>
+    <a href="{% url 'testtextfile' %}">text file</a>
+</li>
+<li>
+    <a href="{% url 'testcsvfile' %}">csv file</a>
+</li>
+<li>
+    <a href="{% url 'testpdffile' %}">pdf file</a>
+</li>
+<table class="table table-striped small">
+    <thead><tr><td colspan="9"><strong></strong></td></tr></thead>
+    <thead><tr>
+                <td>Start DateTime</td>
+                <td>TollFree</td>
+                <td>AnswerPoint</td>
+                <td>Customer Name</td>
+                <td>Account Num</td>
+                <td>Caller</td>
+                <td>Duration</td>
+                <td>Cost</td>
+                <td></td>
+            </tr>
+    </thead>
+        <tbody>
+           {% for dlist in object_list %}
+            <tr>
+                <td>{{dlist.startdatetime}}</td>
+                <td>{{dlist.tollfree}}</td>
+                <td>{{dlist.answerpoint}}</td>
+                <td>{{dlist.customer_name}}</td>
+                <td>{{dlist.account_num}}</td>
+                <td>{{dlist.caller}}</td>
+                <td>{{dlist.duration}}</td>
+                <td>{{dlist.cost}}</td>
+                <td>
+                    <a href="{% url 'tollfree:tollfree-pdf-view' dlist.pk %}"><button class="btn btn-primary">pdf</button></a>
+                </td>
+            </tr>
+            {% endfor %}
+    </tbody>
+</table>
+         
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
